@@ -1,6 +1,11 @@
 NAME = cub3d
 
-FILES = main.c
+FILES = main.c             \
+		mapfile_validate.c \
+		mapfile_utils.c    \
+		array_utils.c      \
+		maparray_parse.c
+
 
 CC = cc
 RM = rm -rf
@@ -8,8 +13,9 @@ CFLAGS = -Wall -Werror -Wextra
 
 LIBFT_A = libft/libft.a
 FT_PRINTF_A = ft_printf/libftprintf.a
+GNL_A = get_next_line/libgnl.a
 
-LINK = $(LIBFT_A) $(FT_PRINTF_A)
+LINK = $(LIBFT_A) $(FT_PRINTF_A) $(GNL_A)
 INCLUDE = -I include
 MAKEFLAGS += --no-print-directory
 
@@ -19,7 +25,7 @@ OBJ_DIR = obj
 SRC = $(addprefix $(SRC_DIR)/, $(FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
-all: libft printf $(NAME)
+all: libft printf gnl $(NAME)
 
 libft:
 	@make -C libft
@@ -27,7 +33,10 @@ libft:
 printf:
 	@make -C ft_printf
 
-$(NAME): $(LIBFT_A) $(FT_PRINTF_A) $(OBJS)
+gnl:
+	@make -C get_next_line
+
+$(NAME): $(LIBFT_A) $(FT_PRINTF_A) $(GNL_A) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LINK)
 	@echo "./$(NAME) was created!"
 
@@ -41,15 +50,17 @@ $(OBJ_DIR):
 clean:
 	@make -C libft clean
 	@make -C ft_printf clean
+	@make -C get_next_line clean
 	@echo "deleted all object files."
 	@$(RM) $(OBJ_DIR)
 
 fclean: clean
 	@make -C libft fclean
 	@make -C ft_printf fclean
+	@make -C get_next_line fclean
 	@$(RM) $(NAME)
 	@echo "./$(NAME) was deleted."
 
 re: fclean all
 
-.PHONY: all fclean clean re libft printf
+.PHONY: all fclean clean re libft printf gnl

@@ -1,6 +1,5 @@
 obj/
-libft.a
-libftprintf.a
+*.a
 *.o
 cub3d
 .vscode/
