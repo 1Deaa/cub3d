@@ -1,15 +1,21 @@
 NAME = cub3d
 
-FILES = main.c             \
-		mapfile_validate.c \
-		mapfile_utils.c    \
-		array_utils.c      \
-		maparray_parse.c
+FILES = main.c                    \
+		cubfile_validate.c        \
+		cubfile_utils.c           \
+		cubarray_parse.c          \
+		cubarray_parse_map.c      \
+		cubarray_parse_colors.c   \
+		cubarray_parse_textures.c \
+		cubarray_validate.c       \
+		cubdata.c                 \
+		array_utils.c             \
+		mapindex_utils.c
 
 
 CC = cc
 RM = rm -rf
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 
 LIBFT_A = libft/libft.a
 FT_PRINTF_A = ft_printf/libftprintf.a

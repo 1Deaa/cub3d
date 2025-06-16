@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapfile_validate.c                                 :+:      :+:    :+:   */
+/*   cubfile_validate.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drahwanj <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,8 @@ bool	main_validate_arguments(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		ft_printf(2, "Error\nInvalid arguments, Usage: %s (*.cub)\n", argv[0]);
+		ft_printf(2, "Error\n[ARGS] Invalid arguments, Usage: %s (*.cub)\n",
+			argv[0]);
 		return (false);
 	}
 	return (true);
@@ -28,7 +29,7 @@ bool	main_validate_arguments(int argc, char **argv)
 /*
 Checks wether the map file extension is correct or not.
 */
-bool	mapfile_validate_extension(const char *file)
+bool	cubfile_validate_extension(const char *file)
 {
 	const char	*map_file;
 	char		*ext;
@@ -36,18 +37,18 @@ bool	mapfile_validate_extension(const char *file)
 	map_file = file;
 	if (!map_file)
 	{
-		ft_printf(2, "Error\nNo valid map file input required!\n");
+		ft_printf(2, "Error\n[CUB] No valid map file input required!\n");
 		return (false);
 	}
 	ext = ft_strrchr(map_file, '.');
 	if (!ext)
 	{
-		ft_printf(2, "Error\nInvalid map extension: no extension!\n");
+		ft_printf(2, "Error\n[CUB] Invalid map extension: no extension!\n");
 		return (false);
 	}
 	if (ft_strncmp(ext, ".cub", 4) != 0)
 	{
-		ft_printf(2, "Error\nInvalid map extension: %s!\n", ext);
+		ft_printf(2, "Error\n[CUB] Invalid map extension: %s!\n", ext);
 		return (false);
 	}
 	return (true);
@@ -56,7 +57,7 @@ bool	mapfile_validate_extension(const char *file)
 /*
 Checks wether target map file exist or not.
 */
-bool	mapfile_validate_exist(const char *file)
+bool	cubfile_validate_exist(const char *file)
 {
 	int	fd;
 
@@ -70,7 +71,7 @@ bool	mapfile_validate_exist(const char *file)
 /*
 Checks wether the map file is empty or not.
 */
-bool	mapfile_validate_unempty(const char *file)
+bool	cubfile_validate_unempty(const char *file)
 {
 	int		fd;
 	char	buffer;
@@ -83,7 +84,7 @@ bool	mapfile_validate_unempty(const char *file)
 	close(fd);
 	if (bytes < 1)
 	{
-		ft_printf(2, "Error\n%s: file is empty!\n", file);
+		ft_printf(2, "Error\n[CUB] %s: file is empty!\n", file);
 		return (false);
 	}
 	return (true);

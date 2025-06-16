@@ -21,7 +21,7 @@ void	array_print(char **array)
 	i = 0;
 	while (array && array[i])
 	{
-		ft_printf(1, "%s", array[i]);
+		ft_printf(1, "[%d] %s\n", i, array[i]);
 		i++;
 	}
 }
@@ -39,4 +39,39 @@ void	array_free(char **array)
 		i++;
 	}
 	free(array);
+}
+
+int	array_size(char **array)
+{
+	int	i;
+
+	if (!array)
+		return (-1);
+	i = 0;
+	while (array && array[i])
+		i++;
+	return (i);
+}
+
+void	array_print_error(char **array, size_t index)
+{
+	size_t	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	ft_printf(2, "Error\n");
+	while (array && array[i])
+	{
+		if (i == index)
+		{
+			ft_printf(2, RED"[%d] %s\n"RESET, i, array[i]);
+			break ;
+		}
+		else
+		{
+			ft_printf(2, GREEN"[%d] %s\n"RESET, i, array[i]);
+		}
+		i++;
+	}
 }

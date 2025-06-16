@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   cubarray_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drahwanj <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/05 18:40:32 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/04/05 18:40:33 by drahwanj         ###   ########.fr       */
+/*   Created: 2025/06/14 19:50:07 by drahwanj          #+#    #+#             */
+/*   Updated: 2025/06/14 19:50:08 by drahwanj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+t_cubdata	*cubarray_parse(t_cubdata *cubdata)
 {
-	size_t	i;
-
-	i = 0;
-	if (n == 0)
-		return (0);
-	if (!s1 || !s2)
-		return (0);
-	while (i < n && s1[i] && s2[i])
+	if (!cubdata)
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		ft_printf(2, "Error\n[DATA] Please init cubdata before using parse!\n");
+		return (NULL);
 	}
-	if (i < n)
-		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	return (0);
+	cubarray_validate(cubdata->raw);
+	cubdata->map = cubarray_parse_map(cubdata->raw);
+	cubdata->textures = cubarray_parse_textures(cubdata->raw);
+	cubdata->colors = cubarray_parse_colors(cubdata->raw);
+	return (cubdata);
 }

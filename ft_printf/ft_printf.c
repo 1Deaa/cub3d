@@ -35,23 +35,3 @@ int	ft_printf(int fd, const char *s, ...)
 	va_end(args);
 	return (count);
 }
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	int	num;
-	int	num2;
-	int x = 0;
-	void *ptr = &x;
-
-	num2 = 0;
-	num = 0;
-
-	num = ft_printf(" NULL %s NULL ", NULL);
-	printf("\n");
-	num2 = printf(" NULL %s NULL ", NULL);
-	printf("\n");
-	printf("Value of ft_printf: %d\n", num);
-	printf("Value of og_printf: %d\n", num2);
-}*/

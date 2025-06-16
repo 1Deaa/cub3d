@@ -15,17 +15,21 @@
 int	main(int argc, char **argv)
 {
 	t_game		game;
-	t_mapdata	mapdata;
+	t_cubdata	*cubdata;
 
 	(void)argv;
 	(void)argc;
 	game.mapfile = argv[1];
-	game.maparray = mapfile_newarray(game.mapfile);
-	maparray_parse(&mapdata, game.maparray);
-	array_print(game.maparray);
-	array_free(game.maparray);
-	// main_validate_arguments(argc, argv);
-	// mapfile_validate_exist(game.mapfile);
-	// mapfile_validate_extension(game.mapfile);
-	// mapfile_validate_unempty(game.mapfile);
+	game.maparray = cubfile_newarray(game.mapfile); // [+] HEAP ALLOCATION
+	cubdata = cubdata_init(game.maparray); 			// [+] HEAP ALLOCATION
+	cubdata = cubarray_parse(cubdata);				// [+] [+] HEAP ALLOCATION
+	//array_print(game.maparray);
+	free(cubdata->textures);    // [-] HEAP DEALLOCATION
+	free(cubdata->map);			// [-] HEAP DEALLOCATION
+	array_free(game.maparray);  // [-] HEAP DEALLOCATION
+	free(cubdata); 				// [-] HEAP DEALLOCATION
+	/*		FINAL STEP
+		FAILURE = FREE EVERYTHING BEFORE - EXIT
+		SUCCESS = CONTINUE
+	*/
 }
