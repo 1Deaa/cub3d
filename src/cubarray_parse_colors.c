@@ -14,12 +14,9 @@
 
 t_colors	*cubarray_parse_colors(char **raw)
 {
-	//t_colors	*colors;
+	t_colors	*colors;
 
 	(void)raw;
-	//colors = ft_malloc(1, sizeof(t_colors));
-	//if (!colors)
-		//return (NULL);
-	//CONT
+	(void)colors;
 	return (NULL);
 }

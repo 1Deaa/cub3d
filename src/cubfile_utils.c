@@ -35,7 +35,8 @@ void	*ft_malloc(size_t count, size_t size)
 	ptr = malloc(full);
 	if (!ptr)
 	{
-		ft_printf(2, "Error\n[MEM] Couldn't allocate memory of %d bytes!\n", full);
+		ft_printf(2, "Error\n[MEM] Couldn't allocate memory of %d bytes!\n",
+			full);
 		return (NULL);
 	}
 	return (ptr);

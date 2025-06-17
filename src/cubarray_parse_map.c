@@ -43,8 +43,10 @@ char	**cubarray_parse_map(char **raw)
 	char	**map;
 
 	mapindex_locate(raw, &map_index);
-	mapindex_eof(raw, &map_index);
-	mapindex_verify(&map_index);
+	if (!mapindex_eof(raw, &map_index))
+		return (NULL);
+	if (!mapindex_verify(&map_index))
+		return (NULL);
 	map = map_get(raw, &map_index);
 	return (map);
 }

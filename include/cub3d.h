@@ -66,8 +66,11 @@ typedef struct s_index
 }	t_index;
 
 void		*ft_malloc(size_t count, size_t size);
+
 bool		is_empty_line(const char *line);
 bool		is_map_line(const char *line);
+bool		is_texture_line(const char *line);
+bool		is_color_line(const char *line);
 
 void		array_print(char **array);
 void		array_free(char **array);
@@ -91,6 +94,10 @@ bool		cubfile_validate_unempty(const char *file);
 char		**cubfile_newarray(const char *filename);
 
 t_cubdata	*cubdata_init(char **cubarray);
+t_cubdata	*cubdata_extract(char *filename);
+void		cubdata_print(t_cubdata *cubdata);
+void		cubdata_free(t_cubdata *cubdata);
+bool		cubdata_verify(t_cubdata *cubdata);
 
 t_cubdata	*cubarray_parse(t_cubdata *cubdata);
 char		**cubarray_parse_map(char **raw);

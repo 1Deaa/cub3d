@@ -19,8 +19,17 @@ t_cubdata	*cubarray_parse(t_cubdata *cubdata)
 		ft_printf(2, "Error\n[DATA] Please init cubdata before using parse!\n");
 		return (NULL);
 	}
-	cubarray_validate(cubdata->raw);
+	if (!cubarray_validate(cubdata->raw))
+	{
+		cubdata_free(cubdata);
+		return (NULL);
+	}
 	cubdata->map = cubarray_parse_map(cubdata->raw);
+	if (!cubdata->map)
+	{
+		cubdata_free(cubdata);
+		return (NULL);
+	}
 	cubdata->textures = cubarray_parse_textures(cubdata->raw);
 	cubdata->colors = cubarray_parse_colors(cubdata->raw);
 	return (cubdata);

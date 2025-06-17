@@ -10,7 +10,9 @@ FILES = main.c                    \
 		cubarray_validate.c       \
 		cubdata.c                 \
 		array_utils.c             \
-		mapindex_utils.c
+		cubdata_verify.c          \
+		mapindex_utils.c          \
+		mapindex.c
 
 
 CC = cc

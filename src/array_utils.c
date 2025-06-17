@@ -36,9 +36,11 @@ void	array_free(char **array)
 	while (array && array[i])
 	{
 		free(array[i]);
+		array[i] = NULL;
 		i++;
 	}
 	free(array);
+	array = NULL;
 }
 
 int	array_size(char **array)
