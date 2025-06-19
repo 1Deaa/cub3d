@@ -31,6 +31,11 @@ t_cubdata	*cubarray_parse(t_cubdata *cubdata)
 		return (NULL);
 	}
 	cubdata->textures = cubarray_parse_textures(cubdata->raw);
+	if (!cubdata->textures)
+	{
+		cubdata_free(cubdata);
+		return (NULL);
+	}
 	cubdata->colors = cubarray_parse_colors(cubdata->raw);
 	return (cubdata);
 }

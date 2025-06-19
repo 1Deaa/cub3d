@@ -87,18 +87,15 @@ t_textures	*cubarray_parse_textures(char **raw)
 	t_textures	*textures;
 	int			i;
 	char		*line;
-	int		verify[4];
+	int			verify[4];
 
 	ft_memzero(verify, sizeof(verify));
+	if (!texture_verify(raw, verify))
+		return (NULL);
 	textures = ft_malloc(1, sizeof(t_textures));
 	if (!textures)
 		return (NULL);
 	textures_init(textures);
-	if (!texture_verify(raw, verify))
-	{
-		free(textures);
-		return (NULL);
-	}
 	i = 0;
 	while (raw[i])
 	{

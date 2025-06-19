@@ -55,25 +55,26 @@ int	array_size(char **array)
 	return (i);
 }
 
-void	array_print_error(char **array, size_t index)
+int	array_print_error(char **array, size_t index)
 {
 	size_t	i;
 
 	if (!array)
-		return ;
+		return (0);
 	i = 0;
 	ft_printf(2, "Error\n");
 	while (array && array[i])
 	{
 		if (i == index)
 		{
-			ft_printf(2, RED"[%d] %s\n"RESET, i, array[i]);
+			ft_printf(2, RED"✕ [%d] %s\n"RESET, i + 1, array[i]);
 			break ;
 		}
 		else
 		{
-			ft_printf(2, GREEN"[%d] %s\n"RESET, i, array[i]);
+			ft_printf(2, GREEN"✓ [%d] %s\n"RESET, i + 1, array[i]);
 		}
 		i++;
 	}
+	return (0);
 }

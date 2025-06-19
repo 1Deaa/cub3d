@@ -75,7 +75,7 @@ bool		is_color_line(const char *line);
 void		array_print(char **array);
 void		array_free(char **array);
 int			array_size(char **array);
-void		array_print_error(char **array, size_t index);
+int			array_print_error(char **array, size_t index);
 
 int			file_open(const char *filename, int o_flag);
 int			file_countlines(const char *filename);
@@ -84,7 +84,6 @@ void		mapindex_locate(char **maparray, t_index *index);
 bool		mapindex_eof(char **maparray, t_index *index);
 bool		mapindex_verify(t_index	*index);
 char		**map_get(char **cubarray, t_index *index);
-
 
 bool		main_validate_arguments(int argc, char **argv);
 
@@ -103,6 +102,7 @@ t_cubdata	*cubarray_parse(t_cubdata *cubdata);
 char		**cubarray_parse_map(char **raw);
 t_textures	*cubarray_parse_textures(char **raw);
 t_colors	*cubarray_parse_colors(char **raw);
+t_colors	*colors_parse(t_colors *colors, char *line);
 
 bool		cubarray_validate(char **cubarray);
 
