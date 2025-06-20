@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cubdata_internal.h"
 
 bool	is_empty_line(const char *line)
 {

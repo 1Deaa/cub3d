@@ -15,7 +15,6 @@ OBJS	= $(SRCS:.c=.o)
 
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
-INCLUDE = -I ../include
 # COLORS
 
 DEF_COLOR = \e[1;39m
@@ -48,6 +47,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
+	@echo "$(NAME) was deleted."
 
 re: fclean all
 

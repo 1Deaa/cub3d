@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cubdata_internal.h"
 
 void	array_print(char **array)
 {

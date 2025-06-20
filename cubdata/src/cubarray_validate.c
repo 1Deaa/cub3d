@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cubdata_internal.h"
 
 static bool	is_valid_identifier(const char *line)
 {

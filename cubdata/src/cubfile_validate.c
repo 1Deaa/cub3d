@@ -10,21 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-/*
-Checks wether the argument count is correct or not.
-*/
-bool	main_validate_arguments(int argc, char **argv)
-{
-	if (argc != 2)
-	{
-		ft_printf(2, "Error\n[ARGS] Invalid arguments, Usage: %s (*.cub)\n",
-			argv[0]);
-		return (false);
-	}
-	return (true);
-}
+#include "cubdata_internal.h"
 
 /*
 Checks wether the map file extension is correct or not.

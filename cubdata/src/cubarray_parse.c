@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cubdata_internal.h"
 
 t_cubdata	*cubarray_parse(t_cubdata *cubdata)
 {

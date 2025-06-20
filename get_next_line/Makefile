@@ -6,7 +6,6 @@ FILES = get_next_line.c \
 OBJS = $(FILES:.c=.o)
 
 CC = cc
-INCLUDE = -I ../include
 CFLAGS = -Wall -Werror -Wextra
 
 # COLORS
@@ -38,6 +37,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
+	@echo "$(NAME) was deleted."
 
 re: fclean all
 

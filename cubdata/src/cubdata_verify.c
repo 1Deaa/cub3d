@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cubdata_internal.h"
 
 static bool	cubdata_verify_textures(t_cubdata *cubdata)
 {

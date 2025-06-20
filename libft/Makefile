@@ -53,7 +53,6 @@ WHITE = \e[1;97m
 BLINK = \e[5m
 
 CC = cc
-INCLUDE = -I ../include
 CFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
@@ -71,6 +70,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
+	@echo "$(NAME) was deleted."
 
 re: fclean all
 

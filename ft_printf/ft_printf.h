@@ -18,13 +18,5 @@
 # include <unistd.h>
 
 int	ft_printf(int fd, const char *s, ...);
-int	ft_putchar(int fd, int c);
-int	ft_choose(int fd, const char *s, va_list args, int index);
-int	ft_putstr(int fd, char *str);
-int	ft_putnbr(int fd, int n);
-int	ft_putunsigned(int fd, unsigned int n);
-int	ft_dectohex_c(int fd, unsigned int num);
-int	ft_dectohex_s(int fd, unsigned int num);
-int	ft_print_ptr(int fd, unsigned long long num);
 
 #endif
