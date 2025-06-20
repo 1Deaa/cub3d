@@ -17,14 +17,6 @@
 #  define BUFFER_SIZE 64
 # endif
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*gnl_strjoin(char *s1, char *s2);
-int		gnl_strlen(char *str);
-char	*check_for_newline(char *str);
 char	*get_next_line(int fd);
 
 #endif

@@ -13,16 +13,6 @@
 #ifndef CUBDATA_H
 # define CUBDATA_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdbool.h>
-# include <unistd.h>
-# include <limits.h>
-# include "ft_printf.h"
-# include "libft.h"
-# include "get_next_line.h"
-
 typedef struct s_cubdata	t_cubdata;
 /*
 Returns a pointer to a cubdata structure made from FILENAME.

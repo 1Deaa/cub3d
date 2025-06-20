@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <stdint.h>
 # include <limits.h>
 # include "ft_printf.h"
 # include "libft.h"

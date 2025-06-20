@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_internal.h"
 
 static char	*ft_read(int fd, char *save)
 {
