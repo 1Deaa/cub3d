@@ -15,6 +15,7 @@
 static char	*extract_path(char *line, char **raw, int index)
 {
 	char	*end;
+
 	if (!line)
 		return (NULL);
 	while (*line == ' ' || *line == '\t')
@@ -74,7 +75,8 @@ static bool	texture_verify(char **raw, int verify[4])
 	return (true);
 }
 
-static void	texture_parse(t_textures *textures, char *line, char **raw, int index)
+static void	texture_parse(t_textures *textures, char *line, char **raw,
+	int index)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
