@@ -12,8 +12,9 @@
 
 #include "cub3d.h"
 
-static char	*extract_path(char *line)
+static char	*extract_path(char *line, char **raw, int index)
 {
+	char	*end;
 	if (!line)
 		return (NULL);
 	while (*line == ' ' || *line == '\t')
@@ -22,6 +23,17 @@ static char	*extract_path(char *line)
 		line++;
 	while (*line == ' ' || *line == '\t')
 		line++;
+	end = line;
+	while (*end && *end != ' ' && *end != '\t')
+		end++;
+	while (*end == ' ' || *end == '\t')
+		end++;
+	if (*end != '\0')
+	{
+		array_print_error(raw, index);
+		ft_printf(2, "[CUB] Texture needs to be exactly one token!\n");
+		return (NULL);
+	}
 	return (line);
 }
 
@@ -62,23 +74,23 @@ static bool	texture_verify(char **raw, int verify[4])
 	return (true);
 }
 
-static void	texture_parse(t_textures *textures, char *line)
+static void	texture_parse(t_textures *textures, char *line, char **raw, int index)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
-		textures->no = extract_path(line);
+		textures->no = extract_path(line, raw, index);
 	}
 	else if (ft_strncmp(line, "SO ", 3) == 0)
 	{
-		textures->so = extract_path(line);
+		textures->so = extract_path(line, raw, index);
 	}
 	else if (ft_strncmp(line, "WE ", 3) == 0)
 	{
-		textures->we = extract_path(line);
+		textures->we = extract_path(line, raw, index);
 	}
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 	{
-		textures->ea = extract_path(line);
+		textures->ea = extract_path(line, raw, index);
 	}
 }
 
@@ -102,7 +114,7 @@ t_textures	*cubarray_parse_textures(char **raw)
 		line = raw[i++];
 		while (*line == ' ' || *line == '\t')
 			line++;
-		texture_parse(textures, line);
+		texture_parse(textures, line, raw, i - 1);
 	}
 	return (textures);
 }
