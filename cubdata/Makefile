@@ -27,7 +27,7 @@ OBJ_DIR = obj
 
 SRC = $(addprefix $(SRC_DIR)/, $(FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
-
+DEPS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.d, $(SRC))
 # COLORS
 
 DEF_COLOR = \e[1;39m
@@ -49,14 +49,16 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)✔ $(MAGENTA)created $(WHITE)$(NAME)$(MAGENTA)!$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
 	@echo "· compiling $<"
+
+-include $(DEPS)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR) $(DEPS)
 
 fclean: clean
 	@$(RM) $(NAME)

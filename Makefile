@@ -1,26 +1,26 @@
-NAME = cub3d
+NAME	= cub3d
 
-FILES = main.c
+FILES	= main.c
 
+CC		= cc
+RM		= rm -rf
+CFLAGS	= -g -Wall -Werror -Wextra
 
-CC = cc
-RM = rm -rf
-CFLAGS = -g -Wall -Werror -Wextra
+LIBFT_A		=	libft/libft.a
+FT_PRINTF_A	=	ft_printf/libftprintf.a
+GNL_A		=	get_next_line/libgnl.a
+CUBDATA_A	=	cubdata/libcubdata.a
 
-LIBFT_A = libft/libft.a
-FT_PRINTF_A = ft_printf/libftprintf.a
-GNL_A = get_next_line/libgnl.a
-CUBDATA_A = cubdata/libcubdata.a
+LINK		= $(CUBDATA_A) $(LIBFT_A) $(FT_PRINTF_A) $(GNL_A)
+INCLUDE		= -I include -I cubdata -I libft -I get_next_line -I ft_printf 
+MAKEFLAGS	+= --no-print-directory
 
-LINK = $(CUBDATA_A) $(LIBFT_A) $(FT_PRINTF_A) $(GNL_A)
-INCLUDE = -I include -I cubdata -I libft -I get_next_line -I ft_printf 
-MAKEFLAGS += --no-print-directory
+SRC_DIR	= src
+OBJ_DIR	= obj
 
-SRC_DIR = src
-OBJ_DIR = obj
-
-SRC = $(addprefix $(SRC_DIR)/, $(FILES))
-OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+SRC		= $(addprefix $(SRC_DIR)/, $(FILES))
+OBJS	= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+DEPS	= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.d, $(SRC))
 
 all: libft printf gnl cubdata $(NAME)
 
@@ -41,8 +41,10 @@ $(NAME): $(LIBFT_A) $(FT_PRINTF_A) $(GNL_A) $(CUBDATA_A) $(OBJS)
 	@echo "./$(NAME) was created!"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
 	@echo "· compiling $<"
+
+-include $(DEPS)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)

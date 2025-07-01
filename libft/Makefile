@@ -37,6 +37,7 @@ FILES = ft_strchr.c    \
 		ft_strrchr.c
 
 OBJS = $(FILES:.c=.o)
+DEPS = $(FILES:.c=.d)
 
 # COLORS
 
@@ -62,11 +63,13 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)✔ $(MAGENTA)created $(YELLOW)$(NAME)$(MAGENTA)!$(RESET)"
 
 %.o: %.c
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
 	@echo "· compiling libft/$<"
 
+-include $(DEPS)
+
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) $(DEPS)
 
 fclean: clean
 	@rm -rf $(NAME)

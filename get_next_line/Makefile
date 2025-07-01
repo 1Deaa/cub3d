@@ -4,6 +4,7 @@ FILES = get_next_line.c \
 		get_next_line_utils.c
 
 OBJS = $(FILES:.c=.o)
+DEPS = $(FILES:.c=.d)
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
@@ -29,11 +30,13 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)✔ $(MAGENTA)created $(GREEN)$(NAME)$(MAGENTA)!$(RESET)"
 
 %.o: %.c
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
 	@echo "· compiling get_next_line/$<"
 
+-include $(DEPS)
+
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) $(DEPS)
 
 fclean: clean
 	@rm -rf $(NAME)

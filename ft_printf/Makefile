@@ -12,6 +12,7 @@ AR = ar rcs
 RM = rm -f
 
 OBJS	= $(SRCS:.c=.o)
+DEPS	= $(SRCS:.c=.d)
 
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
@@ -39,11 +40,13 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)✔ $(MAGENTA)created $(CYAN)$(NAME)$(MAGENTA)!$(RESET)"
 
 %.o: %.c
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
 	@echo "· compiling ft_printf/$<"
 
+-include $(DEPS)
+
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
 	@$(RM) $(NAME)
