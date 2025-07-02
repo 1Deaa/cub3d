@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include "cubdata.h"
-
 /*
 Rest of the work...
 */
