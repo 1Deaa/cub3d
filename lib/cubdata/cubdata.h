@@ -13,10 +13,26 @@
 #ifndef CUBDATA_H
 # define CUBDATA_H
 
+typedef struct s_textures
+{
+	char	*no;
+	char	*we;
+	char	*so;
+	char	*ea;
+}	t_textures;
+
+typedef struct s_colors
+{
+	int	f_rgb[3];
+	int	c_rgb[3];
+}	t_colors;
+
 /*
  * DATA
  *    char **raw -> the lines extracted from the file.
  *    char **map -> map matrix.
+ *    int map_height
+ *    int map_width
  * 
  * COLORS
  *    int f_rgb[3] -> floor rgb data.
@@ -29,7 +45,16 @@
  *    char *ea -> east texture path.
  * 
  */
-typedef struct s_cubdata	t_cubdata;
+typedef struct s_cubdata
+{
+	char		**raw;
+	char		**map;
+	int			map_height;
+	int			map_width;
+	t_colors	*colors;
+	t_textures	*textures;
+}	t_cubdata;
+
 /*
  * Extracts cubdata from a .cub file
  *

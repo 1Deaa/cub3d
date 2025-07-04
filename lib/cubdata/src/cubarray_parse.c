@@ -24,7 +24,8 @@ t_cubdata	*cubarray_parse(t_cubdata *cubdata)
 		cubdata_free(cubdata);
 		return (NULL);
 	}
-	cubdata->map = cubarray_parse_map(cubdata->raw);
+	cubdata->map = cubarray_parse_map(cubdata->raw,
+		&cubdata->map_height, &cubdata->map_width);
 	if (!cubdata->map)
 	{
 		cubdata_free(cubdata);

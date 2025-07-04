@@ -28,6 +28,8 @@ t_cubdata	*cubdata_init(char **cubarray)
 	cubdata->textures = NULL;
 	cubdata->map = NULL;
 	cubdata->raw = cubarray;
+	cubdata->map_height = 0;
+	cubdata->map_width = 0;
 	return (cubdata);
 }
 
@@ -39,23 +41,25 @@ void	cubdata_print(t_cubdata *cubdata)
 	if (cubdata->textures)
 	{
 		if (cubdata->textures->no)
-			ft_printf(1, "NO: %s\n", cubdata->textures->no);
+			ft_printf(1, "North\t: %s\n", cubdata->textures->no);
 		if (cubdata->textures->so)
-			ft_printf(1, "SO: %s\n", cubdata->textures->so);
+			ft_printf(1, "South\t: %s\n", cubdata->textures->so);
 		if (cubdata->textures->ea)
-			ft_printf(1, "EA: %s\n", cubdata->textures->ea);
+			ft_printf(1, "East\t: %s\n", cubdata->textures->ea);
 		if (cubdata->textures->we)
-			ft_printf(1, "WE: %s\n", cubdata->textures->we);
+			ft_printf(1, "West\t: %s\n", cubdata->textures->we);
 	}
 	if (cubdata->colors)
 	{
 		if (cubdata->colors->f_rgb)
-			ft_printf(1, "F : %d, %d, %d\n", cubdata->colors->f_rgb[0],
+			ft_printf(1, "Color F\t: %d, %d, %d\n", cubdata->colors->f_rgb[0],
 				cubdata->colors->f_rgb[1], cubdata->colors->f_rgb[2]);
 		if (cubdata->colors->c_rgb)
-			ft_printf(1, "C : %d, %d, %d\n", cubdata->colors->c_rgb[0],
+			ft_printf(1, "Color C\t: %d, %d, %d\n", cubdata->colors->c_rgb[0],
 				cubdata->colors->c_rgb[1], cubdata->colors->c_rgb[2]);
 	}
+	ft_printf(1, "Map Height\t: %d\n", cubdata->map_height);
+	ft_printf(1, "Map Width\t: %d\n", cubdata->map_width);
 }
 
 void	cubdata_free(t_cubdata *cubdata)

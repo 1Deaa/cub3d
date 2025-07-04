@@ -33,48 +33,6 @@
 # define CYAN    "\033[0;36m"
 # define RESET   "\033[0m"
 
-typedef struct s_textures
-{
-	char	*no;
-	char	*we;
-	char	*so;
-	char	*ea;
-}	t_textures;
-
-typedef struct s_colors
-{
-	int	f_rgb[3];
-	int	c_rgb[3];
-}	t_colors;
-
-/*
- * DATA
- *    char **raw -> the lines extracted from the file.
- *    char **map -> map matrix.
- *    int map_height
- *    int map_width
- * 
- * COLORS
- *    int f_rgb[3] -> floor rgb data.
- *    int c_rgb[3] -> ceiling rgb data.
- * 
- * TEXTURES
- *    char *no -> north texture path.
- *    char *we -> west texture path.
- *    char *so -> south texture path.
- *    char *ea -> east texture path.
- * 
- */
-typedef struct s_cubdata
-{
-	char		**raw;
-	char		**map;
-	int			map_height;
-	int			map_width;
-	t_colors	*colors;
-	t_textures	*textures;
-}	t_cubdata;
-
 typedef struct s_index
 {
 	int	start;
@@ -87,6 +45,8 @@ bool		is_empty_line(const char *line);
 bool		is_map_line(const char *line);
 bool		is_texture_line(const char *line);
 bool		is_color_line(const char *line);
+bool		is_valid_player(char **map);
+bool		is_closed_walls(char **map, int height, int width);
 
 void		array_print(char **array);
 void		array_free(char **array);
@@ -113,7 +73,7 @@ t_cubdata	*cubdata_init(char **cubarray);
 bool		cubdata_verify(t_cubdata *cubdata);
 
 t_cubdata	*cubarray_parse(t_cubdata *cubdata);
-char		**cubarray_parse_map(char **raw);
+char		**cubarray_parse_map(char **raw, int *height, int *width);
 t_textures	*cubarray_parse_textures(char **raw);
 t_colors	*cubarray_parse_colors(char **raw);
 t_colors	*colors_parse(t_colors *colors, char *line);
