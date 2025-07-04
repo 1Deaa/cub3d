@@ -78,3 +78,25 @@ int	array_print_error(char **array, size_t index)
 	}
 	return (0);
 }
+
+int	array_count_target(char **array, char target[])
+{
+	int	cnt;
+	int	i;
+	int	j;
+
+	i = 0;
+	cnt = 0;
+	while (array && array[i])
+	{
+		j = 0;
+		while (array && array[i] && array[i][j])
+		{
+			if (ft_strchr(target, array[i][j]))
+				cnt++;
+			j++;
+		}
+		i++;
+	}
+	return (cnt);
+}

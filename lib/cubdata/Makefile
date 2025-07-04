@@ -10,6 +10,7 @@ FILES = cubfile_validate.c           \
 		cubarray_validate.c          \
 		cubdata.c                    \
 		array_utils.c                \
+		array_utils2.c               \
 		cubdata_verify.c             \
 		mapindex_utils.c             \
 		mapindex.c

@@ -63,7 +63,7 @@ void	cubdata_free(t_cubdata *cubdata)
 	if (!cubdata)
 		return ;
 	array_free(cubdata->raw);
-	free(cubdata->map);
+	array_free(cubdata->map);
 	cubdata->map = NULL;
 	free(cubdata->textures);
 	cubdata->textures = NULL;

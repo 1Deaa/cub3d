@@ -47,10 +47,30 @@ typedef struct s_colors
 	int	c_rgb[3];
 }	t_colors;
 
+/*
+ * DATA
+ *    char **raw -> the lines extracted from the file.
+ *    char **map -> map matrix.
+ *    int map_height
+ *    int map_width
+ * 
+ * COLORS
+ *    int f_rgb[3] -> floor rgb data.
+ *    int c_rgb[3] -> ceiling rgb data.
+ * 
+ * TEXTURES
+ *    char *no -> north texture path.
+ *    char *we -> west texture path.
+ *    char *so -> south texture path.
+ *    char *ea -> east texture path.
+ * 
+ */
 typedef struct s_cubdata
 {
 	char		**raw;
 	char		**map;
+	int			map_height;
+	int			map_width;
 	t_colors	*colors;
 	t_textures	*textures;
 }	t_cubdata;
@@ -70,8 +90,11 @@ bool		is_color_line(const char *line);
 
 void		array_print(char **array);
 void		array_free(char **array);
+void		array_free_i(char **array, size_t index);
 int			array_size(char **array);
 int			array_print_error(char **array, size_t index);
+int			array_count_target(char **array, char target[]);
+int			array_max_width(char **array);
 
 int			file_open(const char *filename, int o_flag);
 int			file_countlines(const char *filename);

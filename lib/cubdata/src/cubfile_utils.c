@@ -51,7 +51,7 @@ int	file_open(const char *filename, int o_flag)
 
 	if (!filename)
 	{
-		ft_printf(2, "Error\n[FILE] No valid map file input required!\n");
+		ft_printf(2, "Error\n[FILE] No valid map file, input required!\n");
 		return (-1);
 	}
 	fd = open(filename, o_flag);

@@ -23,7 +23,7 @@ bool	cubfile_validate_extension(const char *file)
 	map_file = file;
 	if (!map_file)
 	{
-		ft_printf(2, "Error\n[CUB] No valid map file input required!\n");
+		ft_printf(2, "Error\n[CUB] No valid map file, input required!\n");
 		return (false);
 	}
 	ext = ft_strrchr(map_file, '.');
