@@ -1,0 +1,36 @@
+name: Build Program Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install dependencies (if needed, e.g., build tools)
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+
+      # Make the run_make.sh script executable
+      - name: Make script executable
+        run: chmod +x ./check_make.sh
+
+      # Run the script to execute make
+      - name: Run make
+        run: ./check_make.sh
+
+      # Optionally, you can fail the build on errors
+      - name: Check for failure
+        if: ${{ failure() }}
+        run: exit 1
