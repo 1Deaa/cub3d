@@ -6,7 +6,7 @@
 /*   By: drahwanj <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 19:50:07 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/06/14 19:50:08 by drahwanj         ###   ########.fr       */
+/*   Updated: 2025/07/07 12:24:44 by drahwanj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_cubdata	*cubarray_parse(t_cubdata *cubdata)
 		return (NULL);
 	}
 	cubdata->map = cubarray_parse_map(cubdata->raw,
-		&cubdata->map_height, &cubdata->map_width);
+			&cubdata->map_height, &cubdata->map_width);
 	if (!cubdata->map)
 	{
 		cubdata_free(cubdata);
