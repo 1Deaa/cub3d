@@ -51,12 +51,10 @@ void	cubdata_print(t_cubdata *cubdata)
 	}
 	if (cubdata->colors)
 	{
-		if (cubdata->colors->f_rgb)
-			ft_printf(1, "Color F\t: %d, %d, %d\n", cubdata->colors->f_rgb[0],
-				cubdata->colors->f_rgb[1], cubdata->colors->f_rgb[2]);
-		if (cubdata->colors->c_rgb)
-			ft_printf(1, "Color C\t: %d, %d, %d\n", cubdata->colors->c_rgb[0],
-				cubdata->colors->c_rgb[1], cubdata->colors->c_rgb[2]);
+		ft_printf(1, "Color F\t: %d, %d, %d\n", cubdata->colors->f_rgb[0],
+			cubdata->colors->f_rgb[1], cubdata->colors->f_rgb[2]);
+		ft_printf(1, "Color C\t: %d, %d, %d\n", cubdata->colors->c_rgb[0],
+			cubdata->colors->c_rgb[1], cubdata->colors->c_rgb[2]);
 	}
 	ft_printf(1, "Map Height\t: %d\n", cubdata->map_height);
 	ft_printf(1, "Map Width\t: %d\n", cubdata->map_width);

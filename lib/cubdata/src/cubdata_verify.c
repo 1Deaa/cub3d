@@ -51,8 +51,8 @@ static bool	cubdata_verify_colors(t_cubdata *cubdata)
 		ft_printf(2, "Error\n[DATA] Missing ceiling color data!\n");
 		return (false);
 	}
-	if (colors->f_rgb[0] == -1 || colors->f_rgb[2] == -1
-		|| colors->f_rgb[3] == -1)
+	if (colors->f_rgb[0] == -1 || colors->f_rgb[1] == -1
+		|| colors->f_rgb[2] == -1)
 	{
 		ft_printf(2, "Error\n[DATA] Missing floor color data!\n");
 		return (false);
