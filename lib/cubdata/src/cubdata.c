@@ -37,6 +37,7 @@ void	cubdata_print(t_cubdata *cubdata)
 {
 	if (!cubdata)
 		return ;
+	ft_printf(1, "━━━━━━━━━━━━━━━━━━CUB DATA━━━━━━━━━━━━━━━━━━\n");
 	array_print(cubdata->map);
 	if (cubdata->textures)
 	{
@@ -51,13 +52,14 @@ void	cubdata_print(t_cubdata *cubdata)
 	}
 	if (cubdata->colors)
 	{
-		ft_printf(1, "Color F\t: %d, %d, %d\n", cubdata->colors->f_rgb[0],
+		ft_printf(1, "RGB F\t: %d, %d, %d\n", cubdata->colors->f_rgb[0],
 			cubdata->colors->f_rgb[1], cubdata->colors->f_rgb[2]);
-		ft_printf(1, "Color C\t: %d, %d, %d\n", cubdata->colors->c_rgb[0],
+		ft_printf(1, "RGB C\t: %d, %d, %d\n", cubdata->colors->c_rgb[0],
 			cubdata->colors->c_rgb[1], cubdata->colors->c_rgb[2]);
 	}
-	ft_printf(1, "Map Height\t: %d\n", cubdata->map_height);
-	ft_printf(1, "Map Width\t: %d\n", cubdata->map_width);
+	ft_printf(1, "Map H\t: %d Blocks\n", cubdata->map_height);
+	ft_printf(1, "Map W\t: %d Blocks\n"RESET, cubdata->map_width);
+	ft_printf(1, "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 }
 
 void	cubdata_free(t_cubdata *cubdata)
