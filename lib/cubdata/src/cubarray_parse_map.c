@@ -42,7 +42,7 @@ void	normalize_line(char *old, char *new, int width)
 	int	i;
 
 	i = 0;
-	while (old[i])
+	while (old[i] && i < width)
 	{
 		if (old[i] == ' ')
 			new[i] = '1';

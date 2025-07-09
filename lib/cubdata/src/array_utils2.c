@@ -12,6 +12,18 @@
 
 #include "cubdata_internal.h"
 
+static int array_strlen_nowhitespace(const char *line)
+{
+	int	len;
+
+	len = ft_strlen(line);
+	if (len == 0)
+		return (0);
+	while (len > 0 && line[len - 1] == ' ')
+		len--;
+	return (len);
+}
+
 int	array_max_width(char **array)
 {
 	int	i;
@@ -23,8 +35,8 @@ int	array_max_width(char **array)
 	cur = 0;
 	while (array && array[i])
 	{
-		cur = ft_strlen(array[i]);
-		if (cur > max)
+		cur = array_strlen_nowhitespace(array[i]);
+		if (cur >= max)
 		{
 			max = cur;
 		}
