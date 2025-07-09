@@ -12,7 +12,7 @@
 
 #include "cubdata_internal.h"
 
-static int array_strlen_nowhitespace(const char *line)
+static int	array_strlen_nowhitespace(const char *line)
 {
 	int	len;
 
