@@ -21,7 +21,7 @@ RM = rm -rf
 CFLAGS = -Wall -Werror -Wextra
 
 LINK = $(LIBFT_A) $(FT_PRINTF_A) $(GNL_A)
-INCLUDE = -I . -I ../libft -I ../ft_printf -I ../get_next_line
+INCLUDE = -I . -I ../../lib/libft -I ../../lib/ft_printf -I ../../lib/get_next_line
 MAKEFLAGS += --no-print-directory
 
 SRC_DIR = src
