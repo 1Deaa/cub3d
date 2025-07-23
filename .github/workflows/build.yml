@@ -19,8 +19,8 @@ jobs:
           pip3 install norminette
       - name: Start Norminette
         run: |
-          chmod +x ./.github/workflows/check_norm.sh
-          ./.github/workflows/check_norm.sh
+          chmod +x ./.github/scripts/check_norm.sh
+          ./.github/scripts/check_norm.sh
       - name: Send warning message
         if: ${{ failure() }}
         run: |
@@ -38,8 +38,8 @@ jobs:
           sudo apt-get install -y build-essential
       - name: Start Build
         run: |
-          chmod +x ./.github/workflows/check_make.sh
-          ./.github/workflows/check_make.sh
+          chmod +x ./.github/scripts/check_make.sh
+          ./.github/scripts/check_make.sh
       - name: Build Failure
         if: ${{ failure() }}
         run: |
