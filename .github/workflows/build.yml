@@ -19,11 +19,6 @@ jobs:
         id: norminette
         run: |
           norminette
-        continue-on-error: true
-      - name: Show warning message on failure
-        if: steps.norminette.outcome == 'failure'
-        run: |
-          echo "::warning ::Norm failed check your code"
   build:
     runs-on: ubuntu-latest
     steps:
