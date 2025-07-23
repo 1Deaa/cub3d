@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_cubdata	*cub;
 
-	(void)argc;//test
+	(void)argc;
 	cub = cubdata_extract(argv[1]);
 	cubdata_print(cub);
 	cubdata_free(cub);
