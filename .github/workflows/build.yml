@@ -16,11 +16,12 @@ jobs:
           sudo apt-get install -y curl python3 python3-pip
           pip3 install norminette
       - name: Start Norminette
+        id: norminette
         run: |
           norminette
         continue-on-error: true
       - name: Show warning message on failure
-        if: failure()
+        if: steps.norminette.outcome == 'failure'
         run: |
           echo "::warning ::Norm failed check your code"
   build:
