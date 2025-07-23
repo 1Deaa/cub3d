@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Install dependencies
         run: |
           sudo apt-get update
@@ -31,7 +33,6 @@ jobs:
       - name: Start Build
         run: |
           make
-        continue-on-error: true
       - name: Build Failure
         if: failure()
         run: |
