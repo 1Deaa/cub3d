@@ -24,8 +24,8 @@
 
 typedef struct s_game
 {
-    t_cubdata	*cubdata;
-    mlx_t		*mlx;
+	t_cubdata	*cubdata;
+	mlx_t		*mlx;
 }	t_game;
 
 mlx_image_t	*cub_img_init(t_colors *colors, mlx_t *mlx);
