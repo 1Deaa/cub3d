@@ -1,6 +1,6 @@
 NAME	= cub3d
 
-FILES	= main.c
+FILES	= main.c rgb_to_window.c
 
 DEF_COLOR = \e[1;39m
 RESET = \e[0m

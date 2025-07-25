@@ -14,7 +14,7 @@ FILES = cubfile_validate.c           \
 		array_utils2.c               \
 		cubdata_verify.c             \
 		mapindex_utils.c             \
-		mapindex.c
+		mapindex.c				
 
 CC = cc
 RM = rm -rf
