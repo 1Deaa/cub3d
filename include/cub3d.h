@@ -14,25 +14,20 @@
 # define CUB3D_H
 
 # include "cubdata.h"
-#include "MLX42.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-/*
-Rest of the work...
-*/
+# include "MLX42.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <math.h>
 
-typedef struct s_imgs
-{
-    mlx_image_t	*color_img;
-}	t_imgs;
-typedef struct s_cub3d
+# define WIDTH 1280
+# define HEIGHT 720
+
+typedef struct s_game
 {
     t_cubdata	*cubdata;
     mlx_t		*mlx;
-    t_imgs        *imgs;
-}	t_cub3d;
-mlx_image_t	*	rgb_to_window(t_colors c, mlx_t *mlx);
+}	t_game;
 
+mlx_image_t	*cub_img_init(t_colors *colors, mlx_t *mlx);
 
 #endif
