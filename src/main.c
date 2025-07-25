@@ -11,13 +11,18 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "MLX42.h"
 
 int	main(int argc, char **argv)
 {
 	t_cubdata	*cub;
+	mlx_t		*mlx;
 
 	(void)argc;
 	cub = cubdata_extract(argv[1]);
 	cubdata_print(cub);
+	mlx = mlx_init(1280, 720, "Cub3d", false);
+	mlx_loop(mlx);
 	cubdata_free(cub);
+	mlx_terminate(mlx);
 }
