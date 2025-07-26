@@ -6,7 +6,7 @@
 /*   By: yousef <yousef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:58:42 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/07/25 17:32:30 by yousef           ###   ########.fr       */
+/*   Updated: 2025/07/26 17:13:07 by drahwanj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_game		game;
+	t_game	game;
 
 	(void)argc;
 	game.cubdata = cubdata_extract(argv[1]);
