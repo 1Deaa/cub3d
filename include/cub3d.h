@@ -22,10 +22,21 @@
 # define WIDTH 1280
 # define HEIGHT 720
 
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
+
 typedef struct s_game
 {
 	t_cubdata	*cubdata;
 	mlx_t		*mlx;
+	t_player	player;
 }	t_game;
 
 mlx_image_t	*cub_img_init(t_colors *colors, mlx_t *mlx);
