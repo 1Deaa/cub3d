@@ -14,13 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
+	t_game		game;
+	mlx_image_t	*img;
 
 	(void)argc;
 	game.cubdata = cubdata_extract(argv[1]);
 	game.mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", false);
-	mlx_image_to_window(game.mlx,
-		cub_img_init(game.cubdata->colors, game.mlx), 0, 0);
+	img = cub_img_init(game.cubdata->colors, game.mlx);
+	mlx_image_to_window(game.mlx, img, 0, 0);
 	mlx_loop(game.mlx);
 	cubdata_free(game.cubdata);
 	mlx_terminate(game.mlx);

@@ -13,6 +13,13 @@
 #ifndef CUBDATA_H
 # define CUBDATA_H
 
+/**
+ * Textures for the Cub3D game.
+ * @param no path of the northen texture.
+ * @param we path of the western texture.
+ * @param so path of the southern texture.
+ * @param ea path of the eastern texture.
+ */
 typedef struct s_textures
 {
 	char	*no;
@@ -20,30 +27,24 @@ typedef struct s_textures
 	char	*so;
 	char	*ea;
 }	t_textures;
-
+/**
+ * Colors of the Floor and Ceiling.
+ * @param f_rgb floor rgb value.
+ * @param c_rgb ceiling rgb value.
+ */
 typedef struct s_colors
 {
 	int	f_rgb[3];
 	int	c_rgb[3];
 }	t_colors;
-
-/*
- * DATA
- *    char **raw -> the lines extracted from the file.
- *    char **map -> map matrix.
- *    int map_height
- *    int map_width
- * 
- * COLORS
- *    int f_rgb[3] -> floor rgb data.
- *    int c_rgb[3] -> ceiling rgb data.
- * 
- * TEXTURES
- *    char *no -> north texture path.
- *    char *we -> west texture path.
- *    char *so -> south texture path.
- *    char *ea -> east texture path.
- * 
+/**
+ * @brief Textures for the Cub3D game.
+ * @param raw the .cub file raw data.
+ * @param map the map 2D array.
+ * @param map_height the map y-axis bits.
+ * @param map_width the map x-axis bits.
+ * @param colors colors of the ceiling and floor.
+ * @param textures textures of the walls in game. 
  */
 typedef struct s_cubdata
 {
@@ -55,30 +56,28 @@ typedef struct s_cubdata
 	t_textures	*textures;
 }	t_cubdata;
 
-/*
- * Extracts cubdata from a .cub file
- *
- * RETURN VALUE
- *     Returns a pointer to a t_cubdata structure extracted from the
- *     specified filename.
- *
- * ERRORS
- *     Returns NULL in case of an error. An error message is printed
- *     to standard error (stderr).
+/**
+ * @brief Extracts cubdata from a .cub file
+ * 
+ * @param filename the file you want to extract from
+ * 
+ * @returns
+ *     a pointer to a t_cubdata structure extracted from the
+ *     specified filename, NULL in case of an error.
  */
 t_cubdata	*cubdata_extract(char *filename);
 
-/*
- * Given a pointer to a t_cubdata structure prints the data
+/**
+ * @brief Given a pointer to a t_cubdata structure prints the data
  * inside the structure to standard output (stdout).
  * 
- * ERRORS
- *     If NULL was passed the function will print nothing.
+ * @param cubdata an address of t_cubdata structure.
+ * 
  */
 void		cubdata_print(t_cubdata *cubdata);
 
-/*
- * Given a pointer to a t_cubdata structure frees all the
+/**
+ * @brief Given a pointer to a t_cubdata structure frees all the
  * data inside the structure.
  */
 void		cubdata_free(t_cubdata *cubdata);
