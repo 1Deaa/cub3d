@@ -21,6 +21,8 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
+# define MOVE_SPEED 0.05
+# define ROTATION_SPEED 0.03
 
 typedef struct s_player
 {
@@ -28,17 +30,28 @@ typedef struct s_player
 	double	y;
 	double	dir_x;
 	double	dir_y;
-	double	plane_x;
-	double	plane_y;
+	double	camera_x;
+	double	camera_y;
 }	t_player;
 
 typedef struct s_game
 {
 	t_cubdata	*cubdata;
 	mlx_t		*mlx;
+	mlx_image_t	*img;
 	t_player	player;
 }	t_game;
 
 mlx_image_t	*cub_img_init(t_colors *colors, mlx_t *mlx);
+
+void		cub_render_frame(void *param);
+
+void		cub_player_init(t_cubdata *data, t_player *player);
+
+void		cub_player_move(t_game *game, double speed);
+
+void		cub_player_rotate(t_game *game, double speed);
+
+void		cub_key_handler(mlx_key_data_t keydata, void *param);
 
 #endif

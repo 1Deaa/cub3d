@@ -1,7 +1,10 @@
 NAME	= cub3d
 
 FILES	= main.c \
-		  cub_img_init.c
+		  cub_img.c \
+		  cub_player.c \
+		  cub_render.c \
+		  cub_keys.c
 
 DEF_COLOR = \e[1;39m
 RESET = \e[0m
