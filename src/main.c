@@ -10,8 +10,8 @@ int	main(int argc, char **argv)
 	cub_player_init(game.cubdata, &game.player);
 	game.cubdata->map[1][3] = '0';
 	game.img = cub_img_init(game.cubdata->colors, game.mlx);
-	cubdata_print(game.cubdata);
-	mlx_key_hook(game.mlx, cub_key_handler, &game);
+	mlx_image_to_window(game.mlx, game.img, 0, 0); // ← Only here once!
+	cubdata_print(game.cubdata);	
 	mlx_loop_hook(game.mlx, cub_render_frame, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);

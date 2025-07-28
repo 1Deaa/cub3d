@@ -6,7 +6,7 @@
 /*   By: yousef <yousef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 00:12:20 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/07/25 17:34:17 by yousef           ###   ########.fr       */
+/*   Updated: 2025/07/28 18:33:56 by yousef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-
+# include "../libft/libft.h"
 # define WIDTH 1280
 # define HEIGHT 720
 # define MOVE_SPEED 0.05
@@ -53,5 +53,8 @@ void		cub_player_move(t_game *game, double speed);
 void		cub_player_rotate(t_game *game, double speed);
 
 void		cub_key_handler(mlx_key_data_t keydata, void *param);
+
+bool	is_walkable(t_cubdata *data, int x, int y);
+
 
 #endif

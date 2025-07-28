@@ -9,13 +9,13 @@ void	cub_key_handler(mlx_key_data_t keydata, void *param)
 	{
 		if (keydata.key == MLX_KEY_W)
             cub_player_move(game, MOVE_SPEED);
-        else if (keydata.key == MLX_KEY_S)
+        if (keydata.key == MLX_KEY_S)
             cub_player_move(game, -MOVE_SPEED);
-        else if (keydata.key == MLX_KEY_D)
+        if (keydata.key == MLX_KEY_D)
             cub_player_rotate(game, -ROTATION_SPEED);
-        else if (keydata.key == MLX_KEY_A)
+        if (keydata.key == MLX_KEY_A)
             cub_player_rotate(game, ROTATION_SPEED);
-        else if (keydata.key == MLX_KEY_ESCAPE)
+        if (keydata.key == MLX_KEY_ESCAPE)
         {
             mlx_close_window(game->mlx);
             cubdata_free(game->cubdata);

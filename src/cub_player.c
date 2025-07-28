@@ -18,11 +18,11 @@ void	cub_player_move(t_game *game, double speed)
 
 	map_x = (int)(game->player.x + (game->player.dir_x * speed));
 	map_y = (int)(game->player.y + (game->player.dir_y * speed));
-	if (game->cubdata->map[(int)game->player.y][map_x] == '0')
+	if (is_walkable(game->cubdata, map_x, (int)game->player.y))
 	{
 		game->player.x += game->player.dir_x * speed;
 	}
-	if (game->cubdata->map[(int)game->player.y][map_y] == '0')
+	if (is_walkable(game->cubdata, (int)game->player.x, map_y))
 	{
 		game->player.y += game->player.dir_y * speed;
 	}

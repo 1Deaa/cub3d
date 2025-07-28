@@ -106,30 +106,61 @@ static uint32_t	get_hex_color(int *color)
 	return (hex_color);
 }
 
+void	cub_player_strafe(t_game *game, double speed)
+{
+	double perp_dir_x = game->player.dir_y;
+	double perp_dir_y = -game->player.dir_x;
+
+	int	map_x = (int)(game->player.x + perp_dir_x * speed);
+	int	map_y = (int)(game->player.y + perp_dir_y * speed);
+
+    if (is_walkable(game->cubdata, map_x, (int)game->player.y))
+		game->player.x += perp_dir_x * speed;
+	if (is_walkable(game->cubdata, (int)game->player.x, map_y))
+		game->player.y += perp_dir_y * speed;
+}
+
+bool	is_walkable(t_cubdata *data, int x, int y)
+{
+	if (y < 0 || y >= data->map_height || x < 0 || x >= (int)ft_strlen(data->map[y]))
+		return (false);
+	return (data->map[y][x] == '0');
+}
+
+
 void	cub_render_frame(void *param)
 {
-	t_game	*game;
-	
-	game = (t_game *)param;
-	mlx_image_to_window(game->mlx, game->img, 0, 0);
-    uint16_t	x;
-	uint16_t	y;
-	uint32_t	ceiling_color;
-	uint32_t	floor_color;
-	ceiling_color = get_hex_color(game->cubdata->colors->c_rgb);
-	floor_color = get_hex_color(game->cubdata->colors->f_rgb);
-	y = -1;
-	while (++y < HEIGHT)
-	{
-		x = -1;
-		while (++x < WIDTH)
-		{
-			if (y < HEIGHT / 2)
-				mlx_put_pixel(game->img, x, y, ceiling_color);
-			else
-				mlx_put_pixel(game->img, x, y, floor_color);
-		}
-	}
+	t_game	*game = (t_game *)param;
+
+	// Movement
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+		cub_player_move(game, MOVE_SPEED);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+		cub_player_move(game, -MOVE_SPEED);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+		cub_player_strafe(game, -MOVE_SPEED);  // strafe left
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		cub_player_strafe(game, MOVE_SPEED);   // strafe right
+
+	// View rotation
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+		cub_player_rotate(game, ROTATION_SPEED);   // rotate left
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		cub_player_rotate(game, -ROTATION_SPEED);  // rotate right
+
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(game->mlx);
+
+	// Draw floor and ceiling
+	uint32_t ceiling_color = get_hex_color(game->cubdata->colors->c_rgb);
+	uint32_t floor_color   = get_hex_color(game->cubdata->colors->f_rgb);
+	for (int y = 0; y < HEIGHT; y++)
+		for (int x = 0; x < WIDTH; x++)
+			mlx_put_pixel(game->img, x, y, (y < HEIGHT / 2) ? ceiling_color : floor_color);
+
+	// Raycast walls
 	raycast(game);
-	mlx_image_to_window(game->mlx, game->img, 0, 0);
+
+	// Present image
 }
+
