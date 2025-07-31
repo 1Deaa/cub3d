@@ -21,10 +21,10 @@ bool	is_walkable(t_cubdata *data, int x, int y)
 
 void	cub_player_init(t_game *game)
 {
-	game->player.x = 		game->cubdata->pos_x;
-	game->player.y = 		game->cubdata->pos_y;
-	game->player.dir_x = 	game->cubdata->dir_x;
-	game->player.dir_y = 	game->cubdata->dir_y;
+	game->player.x = game->cubdata->pos_x;
+	game->player.y = game->cubdata->pos_y;
+	game->player.dir_x = game->cubdata->dir_x;
+	game->player.dir_y = game->cubdata->dir_y;
 	game->player.camera_x = game->cubdata->camera_x;
 	game->player.camera_y = game->cubdata->camera_y;
 }
