@@ -101,5 +101,6 @@ t_cubdata	*cubdata_extract(char *filename)
 		cubdata_free(cubdata);
 		return (NULL);
 	}
+	cubdata_player_locate(cubdata);
 	return (cubdata);
 }

@@ -10,6 +10,7 @@ FILES = cubfile_validate.c           \
 		cubarray_parse_textures.c    \
 		cubarray_validate.c          \
 		cubdata.c                    \
+		cubdata_player_direction.c   \
 		array_utils.c                \
 		array_utils2.c               \
 		cubdata_verify.c             \

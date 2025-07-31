@@ -79,5 +79,6 @@ t_colors	*cubarray_parse_colors(char **raw);
 t_colors	*colors_parse(t_colors *colors, char *line);
 
 bool		cubarray_validate(char **cubarray);
+void		cubdata_player_locate(t_cubdata *cubdata);
 
 #endif

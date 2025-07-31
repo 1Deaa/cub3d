@@ -12,14 +12,6 @@
 
 #include "cub3d.h"
 
-static uint32_t	get_hex_color(int *color)
-{
-	uint32_t	hex_color;
-
-	hex_color = (color[0] << 24) | (color[1] << 16) | (color[2] << 8) | 255;
-	return (hex_color);
-}
-
 mlx_image_t	*cub_img_init(t_colors *colors, mlx_t *mlx)
 {
 	uint16_t	x;

@@ -1,104 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub_render.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drahwanj <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/31 13:23:00 by drahwanj          #+#    #+#             */
+/*   Updated: 2025/07/31 13:23:01 by drahwanj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void raycast(t_game *game)
-{
-    for (int x = 0; x < WIDTH; x++)
-    {
-        double camera_x = 2 * x / (double)WIDTH - 1; // x-coordinate in camera space
-        double ray_dir_x = game->player.dir_x + game->player.camera_x * camera_x;
-        double ray_dir_y = game->player.dir_y + game->player.camera_y * camera_x;
-
-        int map_x = (int)game->player.x;
-        int map_y = (int)game->player.y;
-
-        double side_dist_x;
-        double side_dist_y;
-
-        double delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
-        double delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
-
-        int step_x;
-        int step_y;
-
-        int hit = 0; // was there a wall hit?
-        int side;    // was a NS or EW wall hit?
-
-        // Calculate step and initial sideDist
-        if (ray_dir_x < 0)
-        {
-            step_x = -1;
-            side_dist_x = (game->player.x - map_x) * delta_dist_x;
-        }
-        else
-        {
-            step_x = 1;
-            side_dist_x = (map_x + 1.0 - game->player.x) * delta_dist_x;
-        }
-        if (ray_dir_y < 0)
-        {
-            step_y = -1;
-            side_dist_y = (game->player.y - map_y) * delta_dist_y;
-        }
-        else
-        {
-            step_y = 1;
-            side_dist_y = (map_y + 1.0 - game->player.y) * delta_dist_y;
-        }
-
-        // Perform DDA
-        while (!hit)
-        {
-            if (side_dist_x < side_dist_y)
-            {
-                side_dist_x += delta_dist_x;
-                map_x += step_x;
-                side = 0;
-            }
-            else
-            {
-                side_dist_y += delta_dist_y;
-                map_y += step_y;
-                side = 1;
-            }
-            // Check if ray has hit a wall
-            if (game->cubdata->map[map_y][map_x] != '0')
-                hit = 1;
-        }
-
-        // Calculate distance projected on camera direction
-        double perp_wall_dist;
-        if (side == 0)
-            perp_wall_dist = (map_x - game->player.x + (1 - step_x) / 2) / ray_dir_x;
-        else
-            perp_wall_dist = (map_y - game->player.y + (1 - step_y) / 2) / ray_dir_y;
-
-        // Calculate height of line to draw
-        int line_height = (int)(HEIGHT / perp_wall_dist);
-
-        // Calculate lowest and highest pixel to fill in current stripe
-        int draw_start = -line_height / 2 + HEIGHT / 2;
-        if (draw_start < 0)
-            draw_start = 0;
-        int draw_end = line_height / 2 + HEIGHT / 2;
-        if (draw_end >= HEIGHT)
-            draw_end = HEIGHT - 1;
-
-        // Choose wall color
-        uint32_t color;
-        if (side == 0)
-            color = 0xFF0000FF; // Blue walls for NS
-        else
-            color = 0xFF00FF00; // Green walls for EW
-
-        // Draw vertical line in image
-        for (int y = draw_start; y < draw_end; y++)
-        {
-            mlx_put_pixel(game->img, x, y, color);
-        }
-    }
-}
-
-static uint32_t	get_hex_color(int *color)
+uint32_t	get_hex_color(int *color)
 {
 	uint32_t	hex_color;
 
@@ -106,61 +20,78 @@ static uint32_t	get_hex_color(int *color)
 	return (hex_color);
 }
 
-void	cub_player_strafe(t_game *game, double speed)
+void    cub_clear_screen(t_cubdata *cubdata, mlx_image_t *img)
 {
-	double perp_dir_x = game->player.dir_y;
-	double perp_dir_y = -game->player.dir_x;
+	uint32_t	c_color;
+	uint32_t	f_color;
+	uint32_t	x;
+	uint32_t	y;
 
-	int	map_x = (int)(game->player.x + perp_dir_x * speed);
-	int	map_y = (int)(game->player.y + perp_dir_y * speed);
-
-    if (is_walkable(game->cubdata, map_x, (int)game->player.y))
-		game->player.x += perp_dir_x * speed;
-	if (is_walkable(game->cubdata, (int)game->player.x, map_y))
-		game->player.y += perp_dir_y * speed;
+	x = 0;
+	y = 0;
+	c_color = get_hex_color(cubdata->colors->c_rgb);
+	f_color = get_hex_color(cubdata->colors->f_rgb);
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			if (y < (HEIGHT / 2))
+				mlx_put_pixel(img, x, y, c_color);
+			else
+				mlx_put_pixel(img, x, y, f_color);
+			x++;
+		}
+		y++;
+	}
 }
-
-bool	is_walkable(t_cubdata *data, int x, int y)
-{
-	if (y < 0 || y >= data->map_height || x < 0 || x >= (int)ft_strlen(data->map[y]))
-		return (false);
-	return (data->map[y][x] == '0');
-}
-
 
 void	cub_render_frame(void *param)
 {
 	t_game	*game = (t_game *)param;
+	static struct timeval	prev_time = {0};
+	struct timeval			curr_time;
+	double					elapsed_time = 0.0;
+	double					fps = 0.0;
+	char					fps_str[32];
+	static mlx_image_t		*last_fps_img = NULL;
 
-	// Movement
+	if (last_fps_img)
+		mlx_delete_image(game->mlx, last_fps_img);
+
+	gettimeofday(&curr_time, NULL);
+
+	if (prev_time.tv_sec != 0)
+	{
+		elapsed_time = (curr_time.tv_sec - prev_time.tv_sec) + (curr_time.tv_usec - prev_time.tv_usec) / 1000000.0;
+		fps = 1.0 / elapsed_time;
+	}
+	prev_time = curr_time;
+
+	/* Player & Camera Movement */
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 		cub_player_move(game, MOVE_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		cub_player_move(game, -MOVE_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		cub_player_strafe(game, -MOVE_SPEED);  // strafe left
+		cub_player_strafe(game, -MOVE_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		cub_player_strafe(game, MOVE_SPEED);   // strafe right
-
-	// View rotation
+		cub_player_strafe(game, MOVE_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-		cub_player_rotate(game, ROTATION_SPEED);   // rotate left
+		cub_player_rotate(game, ROTATION_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-		cub_player_rotate(game, -ROTATION_SPEED);  // rotate right
-
+		cub_player_rotate(game, -ROTATION_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 
-	// Draw floor and ceiling
-	uint32_t ceiling_color = get_hex_color(game->cubdata->colors->c_rgb);
-	uint32_t floor_color   = get_hex_color(game->cubdata->colors->f_rgb);
-	for (int y = 0; y < HEIGHT; y++)
-		for (int x = 0; x < WIDTH; x++)
-			mlx_put_pixel(game->img, x, y, (y < HEIGHT / 2) ? ceiling_color : floor_color);
+	/* Reset Screen */
+	cub_clear_screen(game->cubdata, game->img);
 
-	// Raycast walls
-	raycast(game);
-
-	// Present image
+	/* Raycast walls */
+	cub_raycast(game);
+	if (fps > 0.0)
+	{
+		snprintf(fps_str, sizeof(fps_str), "FPS: %.2f", fps);
+		last_fps_img = mlx_put_string(game->mlx, fps_str, 10, 10);
+	}
 }
-

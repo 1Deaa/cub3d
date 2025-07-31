@@ -52,6 +52,12 @@ typedef struct s_cubdata
 	char		**map;
 	int			map_height;
 	int			map_width;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		camera_x;
+	double		camera_y;
 	t_colors	*colors;
 	t_textures	*textures;
 }	t_cubdata;
@@ -79,6 +85,9 @@ void		cubdata_print(t_cubdata *cubdata);
 /**
  * @brief Given a pointer to a t_cubdata structure frees all the
  * data inside the structure.
+ * 
+ * @param cubdata an address of t_cubdata structure.
+ * 
  */
 void		cubdata_free(t_cubdata *cubdata);
 
