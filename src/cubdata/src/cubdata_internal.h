@@ -63,6 +63,7 @@ int			array_size(char **array);
 int			array_print_error(char **array, size_t index);
 int			array_count_target(char **array, char target[]);
 int			array_max_width(char **array);
+int			array_width(char **array);
 
 int			file_open(const char *filename, int o_flag);
 int			file_countlines(const char *filename);
@@ -89,6 +90,10 @@ t_colors	*colors_parse(t_colors *colors, char *line);
 bool		cubarray_validate(char **cubarray);
 void		cubdata_player_locate(t_cubdata *cubdata);
 
-bool	validate_map(char **map, int height);
+bool		validate_map(char **map, int height, int width);
+bool		flood_fill(t_mapinfo *info, int x, int y);
+bool		run_flood_checks(t_mapinfo *info, int height, int width);
+bool		is_valid_flood_cell(t_mapinfo *info, int x, int y);
+bool		is_floodable(char c);
 
 #endif

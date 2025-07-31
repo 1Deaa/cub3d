@@ -8,6 +8,7 @@ FILES = cubfile_validate.c           \
 		cubarray_parse_colors.c      \
 		cubarray_parse_colors_util.c \
 		cubarray_parse_textures.c    \
+		cubarray_floodfill.c         \
 		cubarray_validate.c          \
 		cubdata.c                    \
 		cubdata_player_direction.c   \

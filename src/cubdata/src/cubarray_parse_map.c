@@ -86,37 +86,47 @@ char	**normalize_map(char **map, int width)
 	return (new_map);
 }
 
+void	renormalize_map(char **map, int height, int width)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < height)
+	{
+		j = 0;
+		while (j < width)
+		{
+			if (map[i][j] == ' ')
+				map[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+}
+
 char	**cubarray_parse_map(char **raw, int *height, int *width)
 {
 	t_index	map_index;
 	char	**map;
-	(void)height;
-	(void)width;
 	char	**norm;
 
 	mapindex_locate(raw, &map_index);
-	if (!mapindex_eof(raw, &map_index))
-		return (NULL);
-	if (!mapindex_verify(&map_index))
+	if (!mapindex_eof(raw, &map_index) || !mapindex_verify(&map_index))
 		return (NULL);
 	map = map_get(raw, &map_index);
-	//check for floodfill here
-	norm = normalize_map(map, array_max_width(map));
-	if (!validate_map(norm, array_size(map)))
+	*height = array_size(map);
+	*width = array_max_width(map);
+	norm = normalize_map(map, *width);
+	free(map);
+	if (!norm)
+		return (NULL);
+	if (!is_valid_player(norm) || !validate_map(norm, *height, *width))
 	{
-		free(map);
-		ft_printf(2, "Incorrect map\n");
+		array_free(norm);
 		return (NULL);
 	}
-	free(map);
-	//if (!norm)
-		//return (NULL);
-	//*height = array_size(norm);
-	//*width = array_max_width(norm);
-	//if (!is_valid_player(norm) || !is_closed_walls(norm, *height, *width))
-	//{
-	//	array_free(norm);
-	//	return (NULL);
-	//}
+	renormalize_map(norm, *height, *width);
 	return (norm);
 }
