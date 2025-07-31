@@ -34,9 +34,9 @@ int	main(int argc, char **argv)
 	if (!game.cubdata)
 		return (false);
 
-	game.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
+	/*game.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 
-	cub_player_init(&game); //TODO
+	cub_player_init(&game);
 
 	game.img = cub_img_init(game.cubdata->colors, game.mlx);
 
@@ -46,7 +46,8 @@ int	main(int argc, char **argv)
 
 	mlx_loop(game.mlx);
 
-	mlx_terminate(game.mlx);
+	mlx_terminate(game.mlx);*/
+	cubdata_print(game.cubdata);
 
 	cubdata_free(game.cubdata);
 

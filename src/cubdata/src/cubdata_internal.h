@@ -33,6 +33,14 @@
 # define CYAN    "\033[0;36m"
 # define RESET   "\033[0m"
 
+typedef struct s_mapinfo
+{
+	char	**map;
+	bool	**visited;
+	int		width;
+	int		height;
+}	t_mapinfo;
+
 typedef struct s_index
 {
 	int	start;
@@ -80,5 +88,7 @@ t_colors	*colors_parse(t_colors *colors, char *line);
 
 bool		cubarray_validate(char **cubarray);
 void		cubdata_player_locate(t_cubdata *cubdata);
+
+bool	validate_map(char **map, int height);
 
 #endif

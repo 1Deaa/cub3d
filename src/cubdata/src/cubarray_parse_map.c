@@ -45,14 +45,14 @@ void	normalize_line(char *old, char *new, int width)
 	while (old[i] && i < width)
 	{
 		if (old[i] == ' ')
-			new[i] = '1';
+			new[i] = ' ';
 		else
 			new[i] = old[i];
 		i++;
 	}
 	while (i < width)
 	{
-		new[i] = '1';
+		new[i] = ' ';
 		i++;
 	}
 	new[i] = '\0';
@@ -90,6 +90,8 @@ char	**cubarray_parse_map(char **raw, int *height, int *width)
 {
 	t_index	map_index;
 	char	**map;
+	(void)height;
+	(void)width;
 	char	**norm;
 
 	mapindex_locate(raw, &map_index);
@@ -98,16 +100,23 @@ char	**cubarray_parse_map(char **raw, int *height, int *width)
 	if (!mapindex_verify(&map_index))
 		return (NULL);
 	map = map_get(raw, &map_index);
+	//check for floodfill here
 	norm = normalize_map(map, array_max_width(map));
-	free(map);
-	if (!norm)
-		return (NULL);
-	*height = array_size(norm);
-	*width = array_max_width(norm);
-	if (!is_valid_player(norm) || !is_closed_walls(norm, *height, *width))
+	if (!validate_map(norm, array_size(map)))
 	{
-		array_free(norm);
+		free(map);
+		ft_printf(2, "Incorrect map\n");
 		return (NULL);
 	}
+	free(map);
+	//if (!norm)
+		//return (NULL);
+	//*height = array_size(norm);
+	//*width = array_max_width(norm);
+	//if (!is_valid_player(norm) || !is_closed_walls(norm, *height, *width))
+	//{
+	//	array_free(norm);
+	//	return (NULL);
+	//}
 	return (norm);
 }
