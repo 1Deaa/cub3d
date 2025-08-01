@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drahwanj <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yousef <yousef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 19:48:33 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/07/30 19:48:34 by drahwanj         ###   ########.fr       */
+/*   Updated: 2025/08/01 16:27:16 by yousef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int cub_load_textures(t_game *game)
+{
+
+	int	i;
+
+	i = 0;
+	game->textures[0] = mlx_load_png(game->cubdata->textures->no); // North wall
+	game->textures[1] = mlx_load_png(game->cubdata->textures->so); // South wall
+	game->textures[2] = mlx_load_png(game->cubdata->textures->ea);  // East wall
+	game->textures[3] = mlx_load_png(game->cubdata->textures->we);  // West wall
+
+	while (i < 4)
+	{
+		if (NULL == game->textures[i])
+		{
+			ft_printf(2, "Error\nFailed to load texture %d\n", i);
+			cubdata_free(game->cubdata);
+			return (1);
+		}
+		i++;
+	}
+	{
+		if (!game->textures[i])
+			return ;
+	}
+}
+
 
 bool	cub_verify_args(int argc, char **argv)
 {
@@ -41,6 +69,8 @@ int	main(int argc, char **argv)
 	game.img = cub_img_init(game.cubdata->colors, game.mlx);
 
 	mlx_image_to_window(game.mlx, game.img, 0, 0);
+	
+	cub_load_textures(&game);
 
 	mlx_loop_hook(game.mlx, cub_render_frame, &game);
 
