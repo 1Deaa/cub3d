@@ -122,7 +122,8 @@ char	**cubarray_parse_map(char **raw, int *height, int *width)
 	free(map);
 	if (!norm)
 		return (NULL);
-	if (!is_valid_player(norm) || !validate_map(norm, *height, *width))
+	if (!is_valid_player(norm) || !validate_map(norm, *height, *width)
+		|| !validate_map_corners(norm, *height))
 	{
 		array_free(norm);
 		return (NULL);

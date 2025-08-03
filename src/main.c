@@ -14,20 +14,18 @@
 
 int cub_load_textures(t_game *game)
 {
-
 	int	i;
 
 	i = 0;
-	game->textures[0] = mlx_load_png(game->cubdata->textures->no); // North wall
-	game->textures[1] = mlx_load_png(game->cubdata->textures->so); // South wall
-	game->textures[2] = mlx_load_png(game->cubdata->textures->ea);  // East wall
-	game->textures[3] = mlx_load_png(game->cubdata->textures->we);  // West wall
-
+	game->textures[0] = mlx_load_png(game->cubdata->textures->no);
+	game->textures[1] = mlx_load_png(game->cubdata->textures->so);
+	game->textures[2] = mlx_load_png(game->cubdata->textures->ea);
+	game->textures[3] = mlx_load_png(game->cubdata->textures->we);
 	while (i < 4)
 	{
 		if (NULL == game->textures[i])
 		{
-			ft_printf(2, "Error\nFailed to load texture %d\n", i);
+			ft_printf(2, "Error\n[CUB] Failed to load texture %d\n", i);
 			cubdata_free(game->cubdata);
 			return (1);
 		}
@@ -45,7 +43,7 @@ bool	cub_verify_args(int argc, char **argv)
 {
 	if (2 != argc || NULL == argv || NULL == argv[0] || NULL == argv[1])
 	{
-		ft_printf(2, "Error\nIncorrect args:");
+		ft_printf(2, "Error\n[ARG] Incorrect args:");
 		ft_printf(2, "Usage: %s {cub}\n", argv[0]);
 		return (false);
 	}

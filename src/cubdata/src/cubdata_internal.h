@@ -95,5 +95,6 @@ bool		flood_fill(t_mapinfo *info, int x, int y);
 bool		run_flood_checks(t_mapinfo *info, int height, int width);
 bool		is_valid_flood_cell(t_mapinfo *info, int x, int y);
 bool		is_floodable(char c);
+bool		validate_map_corners(char **map, int height);
 
 #endif

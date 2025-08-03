@@ -5,6 +5,7 @@ FILES = cubfile_validate.c           \
 		cubarray_parse.c             \
 		cubarray_parse_map.c         \
 		cubarray_parse_map2.c        \
+		cubarray_parse_map3.c        \
 		cubarray_parse_colors.c      \
 		cubarray_parse_colors_util.c \
 		cubarray_parse_textures.c    \
