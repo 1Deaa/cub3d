@@ -25,11 +25,11 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define MOVE_SPEED 0.04
-# define ROTATION_SPEED 0.05
-#define TEX_NORTH 0
-#define TEX_SOUTH 1
-#define TEX_WEST  2
-#define TEX_EAST  3
+# define ROTATION_SPEED 0.03
+# define TEX_NORTH 0
+# define TEX_SOUTH 1
+# define TEX_WEST  2
+# define TEX_EAST  3
 
 typedef struct s_player
 {

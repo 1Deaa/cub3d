@@ -35,8 +35,9 @@ int cub_load_textures(t_game *game)
 	}
 	{
 		if (!game->textures[i])
-			return ;
+			return (1);
 	}
+	return (0);
 }
 
 
