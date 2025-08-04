@@ -12,48 +12,6 @@
 
 #include "cub3d.h"
 
-static void	init_ray(t_game *game, int x, t_ray *ray)
-{
-	ray->camera_x = 2 * x / (double)WIDTH - 1;
-	ray->ray_dir_x = game->player.dir_x + game->player.camera_x * ray->camera_x;
-	ray->ray_dir_y = game->player.dir_y + game->player.camera_y * ray->camera_x;
-
-	ray->map_x = (int)game->player.x;
-	ray->map_y = (int)game->player.y;
-
-	if (ray->ray_dir_x == 0)
-		ray->delta_dist_x = 1e30;
-	else
-		ray->delta_dist_x = fabs(1.0 / ray->ray_dir_x);
-
-	if (ray->ray_dir_y == 0)
-		ray->delta_dist_y = 1e30;
-	else
-		ray->delta_dist_y = fabs(1.0 / ray->ray_dir_y);
-
-	if (ray->ray_dir_x < 0)
-	{
-		ray->step_x = -1;
-		ray->side_dist_x = (game->player.x - ray->map_x) * ray->delta_dist_x;
-	}
-	else
-	{
-		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - game->player.x) * ray->delta_dist_x;
-	}
-
-	if (ray->ray_dir_y < 0)
-	{
-		ray->step_y = -1;
-		ray->side_dist_y = (game->player.y - ray->map_y) * ray->delta_dist_y;
-	}
-	else
-	{
-		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - game->player.y) * ray->delta_dist_y;
-	}
-}
-
 static void	perform_dda(t_game *game, t_ray *ray)
 {
 	int	hit;
@@ -138,8 +96,14 @@ static void	draw_vertical_line(t_game *game, int x, t_ray *ray)
 	{
 		int d = y * 256 - HEIGHT * 128 + line_height * 128;
 		int tex_y = ((d * tex->height) / line_height) / 256;
-		uint32_t *pixels = (uint32_t *)tex->pixels;
-		uint32_t color = pixels[tex_y * tex->width + tex_x];
+
+		uint8_t *pixels = tex->pixels;
+		int pixel_index = (tex_y * tex->width + tex_x) * 4;
+		uint8_t r = pixels[pixel_index + 0];
+		uint8_t g = pixels[pixel_index + 1];
+		uint8_t b = pixels[pixel_index + 2];
+		uint8_t a = pixels[pixel_index + 3];
+		uint32_t color = (r << 24) | (g << 16) | (b << 8) | a;
 		mlx_put_pixel(game->img, x, y, color);
 		y++;
 	}

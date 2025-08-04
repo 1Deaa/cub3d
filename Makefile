@@ -4,7 +4,9 @@ FILES	= main.c \
 		  cub_img.c \
 		  cub_player.c \
 		  cub_render.c \
-		  cub_raycast.c
+		  cub_texture.c \
+		  cub_raycast.c \
+		  cub_raycast_init.c
 
 DEF_COLOR = \e[1;39m
 RESET = \e[0m

@@ -43,11 +43,11 @@ typedef struct s_player
 
 typedef struct s_game
 {
-	t_cubdata	*cubdata;
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_player	player;
-	mlx_texture_t *textures[4];
+	t_cubdata		*cubdata;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	t_player		player;
+	mlx_texture_t	*textures[4];
 }	t_game;
 
 typedef struct s_ray
@@ -83,9 +83,10 @@ void		cub_player_rotate(t_game *game, double speed);
 
 void		cub_player_strafe(t_game *game, double speed);
 
-void		cub_key_handler(mlx_key_data_t keydata, void *param);
-
 bool		is_walkable(t_cubdata *data, int x, int y);
 
+void		init_ray(t_game *game, int x, t_ray *ray);
+
+bool		cub_load_textures(t_game *game);
 
 #endif
