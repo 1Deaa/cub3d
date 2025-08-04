@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cubarray_parse_map3.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drahwanj <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yousef <yousef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 13:04:20 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/08/03 13:04:20 by drahwanj         ###   ########.fr       */
+/*   Updated: 2025/08/04 18:16:22 by yousef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	is_valid_cell(char **map, int x, int y, int height)
 {
-	int row_len;
+	int	row_len;
 
 	row_len = 0;
 	if (x < 0 || y < 0 || x >= height)
@@ -61,8 +61,8 @@ static bool	has_invalid_diagonal(char **map, int x, int y, int height)
 
 bool	validate_map_corners(char **map, int height)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	while (x < height)
@@ -74,7 +74,8 @@ bool	validate_map_corners(char **map, int height)
 			{
 				if (has_invalid_diagonal(map, x, y, height))
 				{
-					ft_printf(2, "Error\n[CUB] Map must have walled corners!\n");
+					ft_printf(2,
+						"Error\n[CUB] Map must have walled corners!\n");
 					return (false);
 				}
 			}

@@ -6,7 +6,7 @@
 /*   By: yousef <yousef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 00:12:20 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/08/01 16:10:45 by yousef           ###   ########.fr       */
+/*   Updated: 2025/08/04 17:15:48 by yousef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define MOVE_SPEED 0.04
-# define ROTATION_SPEED 0.03
+# define ROTATION_SPEED 0.05
 # define TEX_NORTH 0
 # define TEX_SOUTH 1
 # define TEX_WEST  2

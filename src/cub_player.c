@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_player.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drahwanj <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yousef <yousef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 12:54:16 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/07/31 12:54:17 by drahwanj         ###   ########.fr       */
+/*   Updated: 2025/08/04 18:12:13 by yousef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ void	cub_player_rotate(t_game *game, double speed)
 	double	old_dir_x;
 	double	old_camera_x;
 
-    old_dir_x = game->player.dir_x;
-    old_camera_x = game->player.camera_x;
+	old_dir_x = game->player.dir_x;
+	old_camera_x = game->player.camera_x;
 	game->player.dir_x = (game->player.dir_x * cos(speed))
-							- (game->player.dir_y * sin(speed));
+		- (game->player.dir_y * sin(speed));
 	game->player.dir_y = (old_dir_x * sin(speed))
-							+ (game->player.dir_y * cos(speed));
+		+ (game->player.dir_y * cos(speed));
 	game->player.camera_x = (game->player.camera_x * cos(speed))
-							- (game->player.camera_y * sin(speed));
+		- (game->player.camera_y * sin(speed));
 	game->player.camera_y = (old_camera_x * sin(speed))
-							+ (game->player.camera_y * cos(speed));
+		+ (game->player.camera_y * cos(speed));
 }
 
 void	cub_player_strafe(t_game *game, double speed)
@@ -70,7 +70,7 @@ void	cub_player_strafe(t_game *game, double speed)
 	perp_dir_y = -game->player.dir_x;
 	map_x = (int)(game->player.x + perp_dir_x * speed);
 	map_y = (int)(game->player.y + perp_dir_y * speed);
-    if (is_walkable(game->cubdata, map_x, (int)game->player.y))
+	if (is_walkable(game->cubdata, map_x, (int)game->player.y))
 		game->player.x += (perp_dir_x * speed);
 	if (is_walkable(game->cubdata, (int)game->player.x, map_y))
 		game->player.y += (perp_dir_y * speed);

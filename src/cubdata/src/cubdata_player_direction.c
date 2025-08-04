@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cubdata_player_direction.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drahwanj <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yousef <yousef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 13:57:20 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/07/31 13:57:21 by drahwanj         ###   ########.fr       */
+/*   Updated: 2025/08/04 18:01:01 by yousef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	cubdata_player_direction(t_cubdata *cubdata, char c)
 	else if (c == 'S')
 	{
 		cubdata->dir_x = 0;
-		cubdata->dir_y = 1;
-		cubdata->camera_x = 0.66;
+		cubdata->dir_y = -1;
+		cubdata->camera_x = -0.66;
 		cubdata->camera_y = 0;
 	}
 	else if (c == 'E')

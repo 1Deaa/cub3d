@@ -6,13 +6,13 @@
 /*   By: yousef <yousef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 19:48:33 by drahwanj          #+#    #+#             */
-/*   Updated: 2025/08/01 16:27:16 by yousef           ###   ########.fr       */
+/*   Updated: 2025/08/04 18:14:05 by yousef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int cub_load_textures(t_game *game)
+int	cub_load_textures(t_game *game)
 {
 	int	i;
 
@@ -31,13 +31,8 @@ int cub_load_textures(t_game *game)
 		}
 		i++;
 	}
-	{
-		if (!game->textures[i])
-			return (1);
-	}
 	return (0);
 }
-
 
 bool	cub_verify_args(int argc, char **argv)
 {
@@ -52,34 +47,22 @@ bool	cub_verify_args(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-    t_game	game;
+	t_game	game;
 
 	if (!cub_verify_args(argc, argv))
 		return (1);
-
 	game.cubdata = cubdata_extract(argv[1]);
 	if (!game.cubdata)
 		return (false);
-
 	game.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
-
 	cub_player_init(&game);
-
 	game.img = cub_img_init(game.cubdata->colors, game.mlx);
-
 	mlx_image_to_window(game.mlx, game.img, 0, 0);
-	
 	cub_load_textures(&game);
-
 	mlx_loop_hook(game.mlx, cub_render_frame, &game);
-
 	mlx_loop(game.mlx);
-
 	mlx_terminate(game.mlx);
-
 	cubdata_print(game.cubdata);
-
 	cubdata_free(game.cubdata);
-
 	return (0);
 }
