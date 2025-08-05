@@ -29,12 +29,12 @@ bool	cubfile_validate_extension(const char *file)
 	ext = ft_strrchr(map_file, '.');
 	if (!ext)
 	{
-		ft_printf(2, "Error\n[CUB] Invalid map extension: no extension!\n");
+		ft_printf(2, "Error\n[CUB] Invalid map extension: no extension\n");
 		return (false);
 	}
 	if (ft_strncmp(ext, ".cub", 4) != 0)
 	{
-		ft_printf(2, "Error\n[CUB] Invalid map extension: %s!\n", ext);
+		ft_printf(2, "Error\n[CUB] Invalid map extension: %s\n", ext);
 		return (false);
 	}
 	return (true);

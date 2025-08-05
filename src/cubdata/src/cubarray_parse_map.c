@@ -45,14 +45,14 @@ void	normalize_line(char *old, char *new, int width)
 	while (old[i] && i < width)
 	{
 		if (old[i] == ' ')
-			new[i] = '1';
+			new[i] = ' ';
 		else
 			new[i] = old[i];
 		i++;
 	}
 	while (i < width)
 	{
-		new[i] = '1';
+		new[i] = ' ';
 		i++;
 	}
 	new[i] = '\0';
@@ -86,6 +86,26 @@ char	**normalize_map(char **map, int width)
 	return (new_map);
 }
 
+void	renormalize_map(char **map, int height, int width)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < height)
+	{
+		j = 0;
+		while (j < width)
+		{
+			if (map[i][j] == ' ')
+				map[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+}
+
 char	**cubarray_parse_map(char **raw, int *height, int *width)
 {
 	t_index	map_index;
@@ -93,21 +113,21 @@ char	**cubarray_parse_map(char **raw, int *height, int *width)
 	char	**norm;
 
 	mapindex_locate(raw, &map_index);
-	if (!mapindex_eof(raw, &map_index))
-		return (NULL);
-	if (!mapindex_verify(&map_index))
+	if (!mapindex_eof(raw, &map_index) || !mapindex_verify(&map_index))
 		return (NULL);
 	map = map_get(raw, &map_index);
-	norm = normalize_map(map, array_max_width(map));
+	*height = array_size(map);
+	*width = array_max_width(map);
+	norm = normalize_map(map, *width);
 	free(map);
 	if (!norm)
 		return (NULL);
-	*height = array_size(norm);
-	*width = array_max_width(norm);
-	if (!is_valid_player(norm) || !is_closed_walls(norm, *height, *width))
+	if (!is_valid_player(norm) || !validate_map(norm, *height, *width)
+		|| !validate_map_corners(norm, *height))
 	{
 		array_free(norm);
 		return (NULL);
 	}
+	renormalize_map(norm, *height, *width);
 	return (norm);
 }

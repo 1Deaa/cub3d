@@ -67,6 +67,7 @@ void	cubdata_free(t_cubdata *cubdata)
 	if (!cubdata)
 		return ;
 	array_free(cubdata->raw);
+	cubdata->raw = NULL;
 	array_free(cubdata->map);
 	cubdata->map = NULL;
 	free(cubdata->textures);
@@ -101,5 +102,6 @@ t_cubdata	*cubdata_extract(char *filename)
 		cubdata_free(cubdata);
 		return (NULL);
 	}
+	cubdata_player_locate(cubdata);
 	return (cubdata);
 }

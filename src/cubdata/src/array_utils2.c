@@ -45,6 +45,13 @@ int	array_max_width(char **array)
 	return (max);
 }
 
+int	array_width(char **array)
+{
+	if (!array || !array[0])
+		return (0);
+	return (ft_strlen(array[0]));
+}
+
 void	array_free_i(char **array, size_t index)
 {
 	size_t	i;

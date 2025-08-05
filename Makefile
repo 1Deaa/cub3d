@@ -1,7 +1,12 @@
 NAME	= cub3d
 
-FILES	= main.c \
-		  cub_img_init.c
+FILES	= main.c             \
+		  cub_player.c       \
+		  cub_render.c       \
+		  cub_texture.c      \
+		  cub_raycast.c      \
+		  cub_raycast_init.c \
+		  cub_raycast_draw.c
 
 DEF_COLOR = \e[1;39m
 RESET = \e[0m

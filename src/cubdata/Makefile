@@ -5,16 +5,20 @@ FILES = cubfile_validate.c           \
 		cubarray_parse.c             \
 		cubarray_parse_map.c         \
 		cubarray_parse_map2.c        \
+		cubarray_parse_map3.c        \
 		cubarray_parse_colors.c      \
 		cubarray_parse_colors_util.c \
 		cubarray_parse_textures.c    \
+		cubarray_floodfill.c         \
 		cubarray_validate.c          \
 		cubdata.c                    \
+		cubdata_player_direction.c   \
 		array_utils.c                \
 		array_utils2.c               \
 		cubdata_verify.c             \
 		mapindex_utils.c             \
-		mapindex.c				
+		mapindex.c				     \
+		cubarray_validate_map.c
 
 CC = cc
 RM = rm -rf
