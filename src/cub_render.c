@@ -12,12 +12,40 @@
 
 #include "cub3d.h"
 
-uint32_t	get_hex_color(int *color)
+static uint32_t	get_hex_color(int *color)
 {
 	uint32_t	hex_color;
 
 	hex_color = (color[0] << 24) | (color[1] << 16) | (color[2] << 8) | 255;
 	return (hex_color);
+}
+
+mlx_image_t	*cub_img_init(t_colors *colors, mlx_t *mlx)
+{
+	uint16_t	x;
+	uint16_t	y;
+	uint32_t	ceiling_color;
+	uint32_t	floor_color;
+	mlx_image_t	*img;
+
+	ceiling_color = get_hex_color(colors->c_rgb);
+	floor_color = get_hex_color(colors->f_rgb);
+	img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (!img)
+		return (NULL);
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			if (y < HEIGHT / 2)
+				mlx_put_pixel(img, x, y, ceiling_color);
+			else
+				mlx_put_pixel(img, x, y, floor_color);
+		}
+	}
+	return (img);
 }
 
 void	cub_clear_screen(t_cubdata *cubdata, mlx_image_t *img)

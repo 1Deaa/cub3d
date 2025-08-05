@@ -83,12 +83,12 @@ int	main(int argc, char **argv)
 	if (!cub_verify_args(argc, argv))
 		return (1);
 	game.cubdata = cubdata_extract(argv[1]);
-	if (!game.cubdata || !cub_init(&game))
+	if (!game.cubdata || !cub_init(&game)
+		|| -1 == mlx_image_to_window(game.mlx, game.img, 0, 0))
 	{
 		cub_clean(&game);
 		return (1);
 	}
-	mlx_image_to_window(game.mlx, game.img, 0, 0);
 	mlx_loop_hook(game.mlx, cub_render_frame, &game);
 	mlx_loop(game.mlx);
 	cub_clean(&game);

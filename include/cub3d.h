@@ -31,6 +31,28 @@
 # define TEX_WEST  2
 # define TEX_EAST  3
 
+typedef struct s_rgba
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+	uint8_t	a;
+}	t_rgba;
+
+typedef struct s_line
+{
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+}	t_line;
+
+typedef struct s_wall
+{
+	t_line			*line;
+	mlx_texture_t	*tex;
+	int				tex_x;
+}	t_wall;
+
 typedef struct s_player
 {
 	double	x;
@@ -67,26 +89,35 @@ typedef struct s_ray
 	double	perp_wall_dist;
 }	t_ray;
 
-uint32_t	get_hex_color(int *color);
+mlx_image_t		*cub_img_init(t_colors *colors, mlx_t *mlx);
 
-mlx_image_t	*cub_img_init(t_colors *colors, mlx_t *mlx);
+void			cub_render_frame(void *param);
 
-void		cub_render_frame(void *param);
+void			cub_raycast(t_game *game);
 
-void		cub_raycast(t_game *game);
+void			cub_player_init(t_game *game);
 
-void		cub_player_init(t_game *game);
+void			cub_player_move(t_game *game, double speed);
 
-void		cub_player_move(t_game *game, double speed);
+void			cub_player_rotate(t_game *game, double speed);
 
-void		cub_player_rotate(t_game *game, double speed);
+void			cub_player_strafe(t_game *game, double speed);
 
-void		cub_player_strafe(t_game *game, double speed);
+bool			is_walkable(t_cubdata *data, int x, int y);
 
-bool		is_walkable(t_cubdata *data, int x, int y);
+void			init_ray(t_game *game, int x, t_ray *ray);
 
-void		init_ray(t_game *game, int x, t_ray *ray);
+bool			cub_load_textures(t_game *game);
 
-bool		cub_load_textures(t_game *game);
+void			draw_vertical_line(t_game *game, int x, t_ray *ray);
+
+double			calculate_perp_wall_distance(t_game *game, t_ray *ray);
+
+mlx_texture_t	*select_texture(t_game *game, t_ray *ray);
+
+int				calculate_texture_x(t_game *game, t_ray *ray,
+					mlx_texture_t *tex);
+
+void			render_wall_stripe(t_game *game, int x, t_wall *wall);
 
 #endif

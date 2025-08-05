@@ -36,77 +36,35 @@ static void	perform_dda(t_game *game, t_ray *ray)
 	}
 }
 
-static void	draw_vertical_line(t_game *game, int x, t_ray *ray)
+static void	calculate_line_info(t_line *info, double dist)
 {
-	int				line_height;
-	int				draw_start;
-	int				draw_end;
-	int				tex_index;
-	mlx_texture_t	*tex;
-	double			wall_x;
-	int				tex_x;
-	int				y;
+	int	h;
+	int	start;
+	int	end;
 
-	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->map_x - game->player.x + (1 - ray->step_x) / 2)
-			/ ray->ray_dir_x;
-	else
-		ray->perp_wall_dist = (ray->map_y - game->player.y + (1 - ray->step_y) / 2)
-			/ ray->ray_dir_y;
+	h = (int)(HEIGHT / dist);
+	start = -h / 2 + HEIGHT / 2;
+	end = h / 2 + HEIGHT / 2;
+	if (start < 0)
+		start = 0;
+	if (end >= HEIGHT)
+		end = HEIGHT - 1;
+	info->line_height = h;
+	info->draw_start = start;
+	info->draw_end = end;
+}
 
-	line_height = (int)(HEIGHT / ray->perp_wall_dist);
+void	draw_vertical_line(t_game *game, int x, t_ray *ray)
+{
+	t_line			line;
+	t_wall			wall;
 
-	draw_start = -line_height / 2 + HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_height / 2 + HEIGHT / 2;
-	if (draw_end >= HEIGHT)
-		draw_end = HEIGHT - 1;
-
-	if (ray->side == 0)
-	{
-		if (ray->ray_dir_x < 0)
-			tex_index = TEX_NORTH;
-		else
-			tex_index = TEX_SOUTH;
-	}
-	else
-	{
-		if (ray->ray_dir_y < 0)
-			tex_index = TEX_WEST;
-		else
-			tex_index = TEX_EAST;
-	}
-
-	tex = game->textures[tex_index];
-
-	if (ray->side == 0)
-		wall_x = game->player.y + ray->perp_wall_dist * ray->ray_dir_y;
-	else
-		wall_x = game->player.x + ray->perp_wall_dist * ray->ray_dir_x;
-	wall_x -= floor(wall_x);
-
-	tex_x = (int)(wall_x * tex->width);
-	if ((ray->side == 0 && ray->ray_dir_x > 0)
-		|| (ray->side == 1 && ray->ray_dir_y < 0))
-		tex_x = tex->width - tex_x - 1;
-
-	y = draw_start;
-	while (y < draw_end)
-	{
-		int d = y * 256 - HEIGHT * 128 + line_height * 128;
-		int tex_y = ((d * tex->height) / line_height) / 256;
-
-		uint8_t *pixels = tex->pixels;
-		int pixel_index = (tex_y * tex->width + tex_x) * 4;
-		uint8_t r = pixels[pixel_index + 0];
-		uint8_t g = pixels[pixel_index + 1];
-		uint8_t b = pixels[pixel_index + 2];
-		uint8_t a = pixels[pixel_index + 3];
-		uint32_t color = (r << 24) | (g << 16) | (b << 8) | a;
-		mlx_put_pixel(game->img, x, y, color);
-		y++;
-	}
+	wall.line = &line;
+	ray->perp_wall_dist = calculate_perp_wall_distance(game, ray);
+	calculate_line_info(&line, ray->perp_wall_dist);
+	wall.tex = select_texture(game, ray);
+	wall.tex_x = calculate_texture_x(game, ray, wall.tex);
+	render_wall_stripe(game, x, &wall);
 }
 
 void	cub_raycast(t_game *game)
