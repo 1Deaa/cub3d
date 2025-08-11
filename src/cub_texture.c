@@ -17,10 +17,10 @@ bool	cub_load_textures(t_game *game)
 	int	i;
 
 	i = 0;
-	game->textures[0] = mlx_load_png(game->cubdata->textures->no);
-	game->textures[1] = mlx_load_png(game->cubdata->textures->so);
-	game->textures[2] = mlx_load_png(game->cubdata->textures->ea);
-	game->textures[3] = mlx_load_png(game->cubdata->textures->we);
+	game->textures[0] = mlx_load_png(game->cubdata->textures->we);
+	game->textures[1] = mlx_load_png(game->cubdata->textures->ea);
+	game->textures[2] = mlx_load_png(game->cubdata->textures->so);
+	game->textures[3] = mlx_load_png(game->cubdata->textures->no);
 	while (i < 4)
 	{
 		if (NULL == game->textures[i])
