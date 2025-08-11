@@ -1,7 +1,7 @@
-NO ./images/collect.png
-WE ./images/player.png
-SO ./images/exit.png
-EA ./images/tile1.png
+NO ./images/north.png
+WE ./images/west.png
+SO ./images/south.png
+EA ./images/east.png
 
 C 135,206,250
 F 34,139,34
@@ -16,7 +16,7 @@ F 34,139,34
 1010100000000100101
 1010100011000100101
 1010101000010100101
-10101010S0010100101
+10101010N0010100101
 1010100011001100101
 1010000000000000101
 1011110011001111101
