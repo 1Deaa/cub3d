@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <math.h>
+# include <fcntl.h>
+# include <unistd.h>
 # include "libft.h"
 # include "ft_printf.h"
 
@@ -119,5 +121,7 @@ int				calculate_texture_x(t_game *game, t_ray *ray,
 					mlx_texture_t *tex);
 
 void			render_wall_stripe(t_game *game, int x, t_wall *wall);
+
+bool			try_open_textures(t_game *game);
 
 #endif

@@ -83,6 +83,11 @@ int	main(int argc, char **argv)
 	if (!cub_verify_args(argc, argv))
 		return (1);
 	game.cubdata = cubdata_extract(argv[1]);
+	if (!try_open_textures(&game))
+	{
+		cub_clean(&game);
+		return (1);
+	}
 	if (!game.cubdata || !cub_init(&game)
 		|| -1 == mlx_image_to_window(game.mlx, game.img, 0, 0))
 	{
